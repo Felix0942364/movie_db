@@ -5,6 +5,10 @@ __pycache__
 db.sqlite3
 
 
+# migration
+*migrations*
+!__init__.py
+
 # front-end
 venv.DS_Store
 node_modules
