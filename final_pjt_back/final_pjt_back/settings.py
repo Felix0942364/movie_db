@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # Django Apps
     'accounts',
     'articles',
+    'movies',
 
     # rest_framework 
     'rest_framework',
@@ -55,8 +56,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     
-    # 사용할 소셜 로그인 사용자 어플 차용
-    'allauth.socialaccount.providers.google',
+    # # 사용할 소셜 로그인 사용자 어플 차용
+    # 'allauth.socialaccount.providers.google',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -92,6 +93,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -103,9 +105,10 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
+    'http://127.0.0.1:8080'
 ]
 
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'final_pjt_back.urls'
 
@@ -157,19 +160,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# 소셜 로그인 세부 옵션
-SOCIALACCOUNT_PROVIDER = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
-    }
-}
+# # 소셜 로그인 세부 옵션
+# SOCIALACCOUNT_PROVIDER = {
+#     'google': {
+#         # For each OAuth based provider, either add a ``SocialApp``
+#         # (``socialaccount`` app) containing the required client
+#         # credentials, or list them here:
+#         'APP': {
+#             'client_id': '123',
+#             'secret': '456',
+#             'key': ''
+#         }
+#     }
+# }
 
 
 # Internationalization
@@ -199,3 +202,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Auth.User -> accounts.User setting
 AUTH_USER_MODEL = 'accounts.User'
+
+# MEDIA_ROOT = BASE_DIR / '../media'
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'

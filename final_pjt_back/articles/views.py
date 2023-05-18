@@ -1,4 +1,3 @@
-
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 # Authentication Decorators
@@ -15,7 +14,7 @@ from .models import Article, Comment
 
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def article_list(request):
     if request.method == 'GET':
         # articles = Article.objects.all()
@@ -32,6 +31,7 @@ def article_list(request):
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
+# @permission_classes([IsAuthenticated])
 def article_detail(request, article_pk):
     # article = Article.objects.get(pk=article_pk)
     article = get_object_or_404(Article, pk=article_pk)
