@@ -1,5 +1,5 @@
 venv
-
+.venv
 # back-end
 __pycache__
 db.sqlite3
