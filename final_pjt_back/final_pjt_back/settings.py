@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # Django Apps
     'accounts',
     'articles',
+    'movies',
 
     # rest_framework 
     'rest_framework',
@@ -199,3 +200,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Auth.User -> accounts.User setting
 AUTH_USER_MODEL = 'accounts.User'
+
+# MEDIA_ROOT = BASE_DIR / '../media'
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
