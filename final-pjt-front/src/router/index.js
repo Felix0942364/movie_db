@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import SearchView from '../views/SearchView.vue'
+import CommunityView from '../views/CommunityView.vue'
+import WatchlistView from '../views/WatchlistView.vue'
+import ProfileView from '../views/ProfileView.vue'
+import ArticleListView from '../views/ArticleListView.vue'
+import SingupView from '../views/SignupView.vue'
+import LoginView from '../views/LoginView.vue'
 
 Vue.use(VueRouter)
 
@@ -11,13 +18,40 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/search',
+    name: 'search',
+    component: SearchView
+  },
+  {
+    path: '/community',
+    name: 'community',
+    component: CommunityView
+  },
+  {
+    path: '/watchlist',
+    name: 'watchlist',
+    component: WatchlistView
+  },
+  {
+    path: '/watchlist/articlelist',
+    name: 'articlelist',
+    component: ArticleListView
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SingupView
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView
+  },
 ]
 
 const router = new VueRouter({
