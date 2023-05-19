@@ -38,8 +38,9 @@ export default new Vuex.Store({
     },
     REMOVE_TOKEN(state) {
       state.token = null
+      state.user = null
       router.push({name:'home'})
-    }
+    },
   },
   actions: {
     getArticles(context) {
