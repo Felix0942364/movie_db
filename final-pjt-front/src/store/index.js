@@ -15,18 +15,22 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
-    movies: [],
-    articles: [],
+    movies: null,
+    articles: null,
+    watchlists: null,
     token: null
   },
   getters: {
     isAuthenticated(state) {
       return state.token ? true : false
-    }
+    },
   },
   mutations: {
     GET_ARTICLES(state, articles) {
       state.articles = articles
+    },
+    GET_WATCHLIST(state, watchlists) {
+      state.watchlists = watchlists
     },
     SAVE_TOKEN(state, token) {
       state.token = token
@@ -34,6 +38,7 @@ export default new Vuex.Store({
     },
     REMOVE_TOKEN(state) {
       state.token = null
+      router.push({name:'home'})
     }
   },
   actions: {
@@ -46,13 +51,31 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-        // console.log(res, context)
+          console.log(res.data)
           context.commit('GET_ARTICLES', res.data)
         })
         .catch((err) => {
         console.log(err)
       })
     },
+
+    getWatchList(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/api/watchlists/2/`,
+        headers: {
+          Authorization : `Token ${context.state.token}`
+        }
+      })
+        .then((res) => {
+        // console.log(res, context)
+          context.commit('GET_WATCHLIST', res.data)
+        })
+        .catch((err) => {
+        console.log(err)
+      })
+    },
+
     signUp(context, payload) {
       const username = payload.username
       const password1 = payload.password1
@@ -72,6 +95,7 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
         
     },
+
     logIn(context, payload) {
       const username = payload.username
       const password = payload.password
@@ -87,6 +111,7 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err))
     },
+
     logOut(context) {
       context.commit('REMOVE_TOKEN')
     }

@@ -36,7 +36,7 @@ def getDetails(request, movie_pk):
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def Watchlists(request, user_pk):
-    watchlists = get_list_or_404(Movie, user = user_pk)
+    watchlists = get_list_or_404(WatchList, user = user_pk)
     if request.method == 'GET':
         serializer = WatchListSerializer(watchlists, many=True)
         return Response(serializer.data)
@@ -62,7 +62,7 @@ def Watchlists(request, user_pk):
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def Watchlist(request, watchlist_pk):
-    watchlist = get_list_or_404(WatchList, pk = watchlist_pk)
+    watchlist = get_object_or_404(WatchList, pk = watchlist_pk)
     if request.method == 'GET':
         serializer = WatchListSerializer(watchlist)
         return Response(serializer.data)

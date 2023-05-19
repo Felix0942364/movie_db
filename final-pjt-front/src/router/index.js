@@ -1,13 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import HomeView from '../views/HomeView.vue'
 import SearchView from '../views/SearchView.vue'
 import CommunityView from '../views/CommunityView.vue'
 import WatchlistView from '../views/WatchlistView.vue'
+
 import ProfileView from '../views/ProfileView.vue'
-import ArticleListView from '../views/ArticleListView.vue'
 import SingupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
+
+import ArticleListView from '../views/ArticleListView.vue'
+import ArticleCreateView from '../views/ArticleCreateView.vue'
 
 Vue.use(VueRouter)
 
@@ -28,8 +32,13 @@ const routes = [
     component: CommunityView
   },
   {
-    path: '/watchlist',
-    name: 'watchlist',
+    path: '/community/create',
+    name: 'createArticle',
+    component: ArticleCreateView
+  },
+  {
+    path: '/watchlists',
+    name: 'watchlists',
     component: WatchlistView
   },
   {
