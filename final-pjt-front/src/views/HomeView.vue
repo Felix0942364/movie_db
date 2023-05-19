@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="Home-head">
-      <img src="@/assets/img/big_logo_white.png">
+      <img width="120px" src="@/assets/img/big_logo_white.png">
     </div>
     <div class="Home-body">
       <div class="Trending">
