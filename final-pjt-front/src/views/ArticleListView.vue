@@ -1,7 +1,7 @@
 <template>
   <div class="articlelist">
     <h1>This is articlelist page</h1>
-    <SingleArticle
+    <ArticleListItem
     v-for="article in articles"
     :key="article.pk"
     :article="article"/>
@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import SingleArticle from '@/components/SingleArticle.vue'
+import ArticleListItem from '@/components/ArticleListItem.vue'
 
 export default {
   name: 'ArticleListView',
   components: {
-    SingleArticle
+    ArticleListItem
   },
   created() {
     this.$store.dispatch('getArticles')
