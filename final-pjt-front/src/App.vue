@@ -2,7 +2,7 @@
   <div id="app">
     <nav>
       <div class="nav-logo">
-        <router-link to="/"><img alt="Vue logo" src="@/assets/img/logo.png"  class="logo-image"></router-link> 
+        <router-link to="/"><img alt="nav logo" src="@/assets/img/logo_white.png"  class="logo-image"></router-link> 
         <router-link to="/" id="homelink">Home</router-link> 
       </div>   
       <div class="nav-list">
@@ -13,7 +13,7 @@
       <div class="nav-profile">
         <div v-if="this.$store.getters.isAuthenticated">
           <router-link to="/profile">Profile</router-link> 
-          <p @click="logOut">Log Out</p> 
+          <a @click="logOut">Log Out</a> 
         </div>
         <div v-else>
           <router-link to="/login">Log In</router-link>
