@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3>댓글</h3>
     <form @submit.prevent="createComment">
       <input type="text" id="commentInput" v-model.trim="commentInput">
       <input type="submit" value="댓글입력"/>

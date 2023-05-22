@@ -26,7 +26,7 @@ def article_list(request):
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             # serializer.save()
-            serializer.save(user=request.user)
+            serializer.save(author=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -38,7 +38,7 @@ def article_detail(request, article_pk):
 
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
     
     elif request.method == 'DELETE':
@@ -87,5 +87,5 @@ def comment_create(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(article=article)
+        serializer.save(article=article, author=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

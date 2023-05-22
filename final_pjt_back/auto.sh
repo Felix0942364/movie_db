@@ -14,3 +14,10 @@ mkdir movies/migrations
 touch accounts/migrations/__init__.py
 touch articles/migrations/__init__.py
 touch movies/migrations/__init__.py
+
+
+
+# python manage.py makemigrations 
+# python manage.py migrate
+# python manage.py runserver
+

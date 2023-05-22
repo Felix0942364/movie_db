@@ -1,7 +1,17 @@
 <template>
   <div class="article">
-    <h1>{{ article.title }}</h1>
-    <div v-html="article.content"></div>
+    <h1>{{ article?.title }}</h1>
+    <div v-html="article?.content"></div>
+    <!-- <p>{{ article?.content }}</p> -->
+    <p>{{ article?.created_at }}</p>
+    <p>{{ article?.updated_at }}</p>
+    <ArticleLikes/>
+
+    <!-- <h2 v-if="aritcle.like_user">♥♡</h2> -->
+
+    <p>raw {{ article }}</p>
+    <h2 v-if="article.comment_count">댓글 : {{ article.comment_count }} 개</h2>
+    <h2 v-else>댓글을 달아주세요</h2>
     <CommentsList
     :comments="article.comment_set"
     @comment-created="createComment"
