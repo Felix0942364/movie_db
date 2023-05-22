@@ -6,7 +6,7 @@ from django.conf import settings
 class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='like_articles')
+    liking_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='liked_articles')
 
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -18,7 +18,7 @@ class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="comments", on_delete=models.CASCADE)
     
-    comment_likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
+    liking_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="liked_comments")
     
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

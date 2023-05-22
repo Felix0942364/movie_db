@@ -7,7 +7,7 @@
     <p>{{ article?.updated_at }}</p>
     <ArticleLikes/>
 
-    <!-- <h2 v-if="aritcle.like_user">♥♡</h2> -->
+    <h2 v-if="article.like_user">♥♡</h2>
 
     <p>raw {{ article }}</p>
     <h2 v-if="article.comment_count">댓글 : {{ article.comment_count }} 개</h2>

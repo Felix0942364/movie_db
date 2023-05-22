@@ -6,9 +6,12 @@ from . import views
 urlpatterns = [
     path('articles/', views.article_list),
     path('articles/<int:article_pk>/', views.article_detail),
+    path('articles/<int:article_pk>/like/', views.article_like),
+    path('articles/<int:article_pk>/comments/', views.comment_create),
+    
     path('comments/', views.comment_list),
     path('comments/<int:comment_pk>/', views.comment_detail),
-    path('articles/<int:article_pk>/comments/', views.comment_create),
+    path('comments/<int:comment_pk>/like/', views.comment_like)
     # # 필수 작성
     # path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # # optional UI

@@ -12,6 +12,8 @@ class ArticleListSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    comment_likes_count = serializers.IntegerField(source = 'liking_users.count', read_only=True)
+    # user_likes = serializers.BooleanField()
 
     class Meta:
         model = Comment
@@ -22,9 +24,12 @@ class CommentSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     comment_set = CommentSerializer(many=True, read_only=True)
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
-    username = serializers.CharField(source='user.username', read_only=True)
+    # username = serializers.CharField(source='user.username', read_only=True)
+    article_likes_count = serializers.IntegerField(source = 'liking_users.count', read_only=True)
+    
 
     class Meta:
         model = Article
         fields = '__all__'
         read_only_fields = ('author', )
+

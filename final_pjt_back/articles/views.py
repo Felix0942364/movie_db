@@ -89,3 +89,25 @@ def comment_create(request, article_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(article=article, author=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+def article_like(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    if article.liking_users.filter(pk=request.user.pk).exists():
+        article.liking_users.remove(request.user)
+    else:
+        article.liking_users.add(request.user)
+    serializer = ArticleSerializer(article)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def comment_like(request, comment_pk):
+    # if request.method == 'POST':
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if comment.liking_users.filter(pk=request.user.pk).exists():
+        comment.liking_users.remove(request.user)
+    else:
+        comment.liking_users.add(request.user)
+    serializer = CommentSerializer(comment)
+    return Response(serializer.data)

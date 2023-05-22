@@ -25,7 +25,7 @@ export default {
     }
   },
   props: {
-    comments:Object,
+    comments:Array,
   },
   methods : {
     createComment() {
