@@ -2,8 +2,12 @@
   <div class="watchlist">
     <h1>This is watchlists page</h1>
     <h2>고사리가 맛있다</h2>
-    <button @click="addWatchList">추가하기</button>
-    <Watchlists
+    <!-- <button @click="addWatchList">추가하기</button> -->
+    <form @submit.prevent="addWatchList">
+      <input type="text" id="newWatchlist" v-model="newWatchlist"><br>
+      <input type="submit" id="submit">
+    </form>
+    <WatchLists
     v-for="(watchlist, index) in myWatchList"
     :key="index"
     :watchlist="watchlist"
@@ -12,24 +16,44 @@
 </template>
 
 <script>
-import Watchlists from "@/components/Watchlists.vue"
+import axios from 'axios'
+import WatchLists from "@/components/WatchLists.vue"
+const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'WatchlistsView',
   components: {
-    Watchlists
+    WatchLists
+  },
+  data() {
+    return {
+      newWatchlist:"",
+    }
   },
   created () {
-    this.getWatchList()
+    this.getMyWatchList()
   },
   methods: {
-    getWatchList() {
-      this.$store.dispatch('getWatchList')
+    getMyWatchList() {
+      this.$store.dispatch('getMyWatchList')
     },
-    addWatchList(val) {
-      console.log(val)
-      console.log('abc')
-      console.log('도레미')
+    addWatchList() {
+      const title = this.newWatchlist 
+      console.log(title, this.$store.state.token)
+      axios({
+        method : 'post',
+        url: `${API_URL}/api/watchlists/`,
+        data: { title },
+        headers: {
+          Authorization : `Token ${this.$store.state.token}`
+        }
+      }) 
+        .then((res) => {
+          console.log(res)
+          this.getMyWatchList()
+        })
+        .catch(err => console.log(err))
+      // this.newWatchlist = ""
     }
   },
   computed: {

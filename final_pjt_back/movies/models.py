@@ -15,5 +15,7 @@ class Movie(models.Model):
 
 class WatchList(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    movies = models.ManyToManyField(Movie, verbose_name='watchlist')
+    movies = models.ManyToManyField(Movie, blank=True, verbose_name='watchlist')
+    title = models.CharField(max_length=50)
     cover_image = models.ImageField(blank=True)
+

@@ -1,19 +1,21 @@
 <template>
   <div class="watchlists">
-    <img :src="watchlist.posterpath"/>
+    <img :src="watchlist.cover_image" v-if="watchlist.cover_image" />
+    <img src="@/assets/img/base_profile2.png" />
+    <h1>{{watchlist.title}}</h1>
     <h2>상세보기</h2>
     <WatchlistItems
-    v-for="movie, index in watchlist"
+    v-for="movie, index in watchlist.movies"
     :key="index"
     :movie="movie"/>
   </div>
 </template>
 
 <script>
-import WatchlistItems from "@/components/Watchlists.vue"
+import WatchlistItems from "@/components/WatchlistItems.vue"
 
 export default {
-  name: 'WatchlistsView',
+  name: 'WatchLists',
   props: {
     watchlist: Object
   },

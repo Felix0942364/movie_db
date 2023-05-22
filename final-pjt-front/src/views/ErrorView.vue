@@ -1,14 +1,11 @@
 <template>
   <div>
-    CHILD
+    404 Page Not Found
   </div>
 </template>
 
 <script>
 export default {
-  name: "WatchListItems",
-  props: {
-    movie : Object
-  }
+  name: 'ErrorView'
 }
 </script>

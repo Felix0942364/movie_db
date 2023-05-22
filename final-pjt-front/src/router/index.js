@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store/index.js'
 
 import HomeView from '@/views/HomeView.vue'
 import SearchView from '@/views/SearchView.vue'
@@ -13,6 +14,8 @@ import LoginView from '@/views/LoginView.vue'
 import ArticleListView from '@/views/ArticleListView.vue'
 import ArticleCreateView from '@/views/ArticleCreateView.vue'
 import ArticleDetailView from '@/views/ArticleDetailView'
+
+import ErrorView from '@/views/ErrorView.vue'
 
 Vue.use(VueRouter)
 
@@ -67,12 +70,38 @@ const routes = [
     name: 'login',
     component: LoginView
   },
+  {
+    path: '*',
+    name: 'error',
+    component: ErrorView
+  }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const auth = store.getters["isAuthenticated"]
+  const authPages = [
+    'search',
+    'community',
+    'articledetail',
+    'createArticle',
+    'watchlists',
+    'articlelist',
+    'profile'
+  ]
+  const isAuthRequired = authPages.includes(to.name)
+  
+  if (isAuthRequired && !auth) {
+    next({name:'login'})
+  } else {
+    next()
+  }
 })
 
 export default router

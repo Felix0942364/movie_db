@@ -5,10 +5,9 @@ import router from '../router'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
-const API_URL = 'http://127.0.0.1:8000'
-
 Vue.use(Vuex)
 
+const API_URL = 'http://127.0.0.1:8000'
 
 export default new Vuex.Store({
   plugins : [
@@ -34,11 +33,13 @@ export default new Vuex.Store({
     },
     SAVE_TOKEN(state, token) {
       state.token = token
+      state.articles = null
+      state.movies = null
+      state.watchlists = null
       router.push({name:'home'})
     },
     REMOVE_TOKEN(state) {
       state.token = null
-      state.user = null
       router.push({name:'home'})
     },
   },
@@ -60,10 +61,10 @@ export default new Vuex.Store({
       })
     },
 
-    getWatchList(context) {
+    getMyWatchList(context) {
       axios({
         method: 'get',
-        url: `${API_URL}/api/watchlists/2/`,
+        url: `${API_URL}/api/watchlists/`,
         headers: {
           Authorization : `Token ${context.state.token}`
         }
@@ -81,7 +82,6 @@ export default new Vuex.Store({
       const username = payload.username
       const password1 = payload.password1
       const password2 = payload.password2
-      console.log(payload)
       axios({
         method: 'post',
         // url: `http://127.0.0.1:8000/accounts/signup/`,
@@ -116,6 +116,7 @@ export default new Vuex.Store({
     logOut(context) {
       context.commit('REMOVE_TOKEN')
     }
+
   },
   modules: {
   }

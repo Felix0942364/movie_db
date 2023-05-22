@@ -35,9 +35,10 @@ def getDetails(request, movie_pk):
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def Watchlists(request, user_pk):
-    watchlists = get_list_or_404(WatchList, user = user_pk)
+def Watchlists(request):
+    print('hi')
     if request.method == 'GET':
+        watchlists = get_list_or_404(WatchList, user=request.user)
         serializer = WatchListSerializer(watchlists, many=True)
         return Response(serializer.data)
     
@@ -47,15 +48,15 @@ def Watchlists(request, user_pk):
             serializer.save(user=request.user)
             return Response(serializer.data, status = status.HTTP_201_CREATED)
     
-    elif request.method == 'PUT':
-        serializer = WatchListSerializer(watchlists, data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
+    # elif request.method == 'PUT':
+    #     serializer = WatchListSerializer(watchlists, data=request.data)
+    #     if serializer.is_valid(raise_exception=True):
+    #         serializer.save()
+    #         return Response(serializer.data)
 
-    elif request.method == 'DELETE':
-        watchlists.delete()
-        return Response(status = status.HTTP_204_NO_CONTENT)
+    # elif request.method == 'DELETE':
+    #     watchlists.delete()
+    #     return Response(status = status.HTTP_204_NO_CONTENT)
 
 
 
@@ -69,7 +70,7 @@ def Watchlist(request, watchlist_pk):
     
     elif request.method == 'POST':
         serializer = WatchListSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status = status.HTTP_201_CREATED)
     
