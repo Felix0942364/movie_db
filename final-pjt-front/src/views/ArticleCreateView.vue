@@ -48,6 +48,7 @@ export default {
         alert('내용 입력해주세요')
         return
       }
+      console.log(this.title,this.content)
       axios({
         method: 'post',
         url: `${API_URL}/api/articles/`,
@@ -212,7 +213,10 @@ export default {
         'DocumentOutline',
         'FormatPainter',
         'TableOfContents'
-    ]
+    ],
+    mediaEmbed: {
+    previewsInData:true
+    }
   })
   .then( editor => {
     ckdata = editor
@@ -238,3 +242,10 @@ export default {
 
 
 </script>
+
+
+<style>
+.ck-content{
+  color: black;
+}
+</style>

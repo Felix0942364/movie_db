@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <button @click="toDetail">{{ article.title }} : {{ article.content }}</button>
+    <button @click="toDetail">{{ article.title }}</button>
   </div>
 </template>
 

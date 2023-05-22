@@ -1,7 +1,7 @@
 <template>
   <div class="article">
     <h1>{{ article.title }}</h1>
-    <h2>{{ article.content }}</h2>
+    <div v-html="article.content"></div>
     <CommentsList
     :comments="article.comment_set"
     @comment-created="createComment"
