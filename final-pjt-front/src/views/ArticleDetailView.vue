@@ -10,7 +10,7 @@
     <h2 v-if="article.like_user">♥♡</h2>
 
     <p>raw {{ article }}</p>
-    <h2 v-if="article.comment_count">댓글 : {{ article.comment_count }} 개</h2>
+    <h2 v-if="article?.comment_count">댓글 : {{ article?.comment_count }} 개</h2>
     <h2 v-else>댓글을 달아주세요</h2>
     <CommentsList
     :comments="article.comment_set"

@@ -4,6 +4,7 @@ import router from '../router'
 
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
+// import { get } from 'core-js/core/dict'
 
 Vue.use(Vuex)
 
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    GET_MOVIES(state, movies){
+      state.movies = movies
+    },
     GET_ARTICLES(state, articles) {
       state.articles = articles
     },
@@ -44,6 +48,24 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getMovies(context){
+      axios({
+        method: 'get',
+        url: 'https://api.themoviedb.org/3/movie/top_rated?',
+        params:{
+          api_key: '',
+          language: 'ko-KR',
+          page:1
+        }
+      })
+      .then((res)=>{
+        console.log(res.data.results)
+        context.commit('GET_MOVIES',res.data.results)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
     getArticles(context) {
       axios({
         method: 'get',
