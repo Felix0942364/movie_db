@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="comments">
     {{ comment.content }}
-    {{ comment.comment_likes_count }}
-    <button @click="commentLike" v-if="computedLike">♥</button>
-    <button @click="commentLike" v-else>♡</button>
+    <span v-show="computedLike">{{ comment.comment_likes_count }}</span>
+    <img class="logos" src="@/assets/img/like.png" @click="commentLike" v-if="computedLike"/>
+    <img class="logos" src="@/assets/img/unlike.png" @click="commentLike" v-else/>
     <span v-if="authorIdentification">
-      <button @click="commentEdit">수정</button>
-      <button @click="commentDelete">삭제</button>
+      <img class="logos" src="@/assets/img/edit_icon.png" @click="commentEdit"/>
+      <img class="logos" src="@/assets/img/delete_icon.png" @click="commentDelete"/>
     </span>
   </div>
 </template>

@@ -1,13 +1,6 @@
 <template>
   <div>
     <h1>게시글 작성</h1>
-    <!-- <form @submit.prevent="createArticle">
-      <label for="title">제목 : </label>
-      <input type="text" id="title" v-model.trim="title"><br>
-      <label for="content">내용 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
-      <input type="submit" id="submit">
-    </form> -->
     <button @click="getTextarea">저장</button>
     <button @click="loadTextarea">불러오기</button>
     <button @click="createArticle">전송!</button>
@@ -21,8 +14,8 @@
     </div>
   </div>
 </template>
-<script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/super-build/ckeditor.js"></script>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/super-build/ckeditor.js"></script>
 <script>
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'

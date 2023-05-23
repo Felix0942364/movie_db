@@ -15,11 +15,10 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
-    movies: null,
-    articles: null,
-    watchlists: null,
-    token: null,
     id: null,
+    token: null,
+    watchlists: null,
+    movies: null,
   },
   getters: {
     isAuthenticated(state) {
@@ -29,9 +28,6 @@ export default new Vuex.Store({
   mutations: {
     GET_MOVIES(state, movies){
       state.movies = movies
-    },
-    GET_ARTICLES(state, articles) {
-      state.articles = articles
     },
     GET_WATCHLIST(state, watchlists) {
       state.watchlists = watchlists
@@ -74,24 +70,7 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-
-    getArticles(context) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/api/articles/`,
-        headers: {
-          Authorization : `Token ${context.state.token}`
-        }
-      })
-        .then((res) => {
-          console.log(res.data)
-          context.commit('GET_ARTICLES', res.data)
-        })
-        .catch((err) => {
-        console.log(err)
-      })
-    },
-
+    
     getMyWatchList(context) {
       axios({
         method: 'get',
