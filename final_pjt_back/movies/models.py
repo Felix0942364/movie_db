@@ -1,21 +1,34 @@
 from django.db import models
 from django.conf import settings
 
-# Create your models here.
+
+class Genre(models.Model):
+    genre_ID = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Disclosure(models.Model):
+    name = models.CharField(max_length=100)
+    # 공개 비공개만 처리
+    def __str__(self):
+        return self.name
+
+
 class Movie(models.Model):
-    movie_id = models.IntegerField()
-    title = models.CharField(max_length=100)
+    movie_id = models.IntegerField(primary_key=True)
+    title = models.CharField(max_length=200)
     rate_average = models.FloatField()
     poster_path = models.URLField(max_length=200)
     overview = models.TextField()
     release_date = models.DateField()
-    # genres = models.ManyToManyField(Genre, verbose_name=_(""))
+    genres = models.ManyToManyField(Genre, verbose_name="movies")
 
-# class Genre(models.Model):
 
 class WatchList(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    movies = models.ManyToManyField(Movie, blank=True, verbose_name='watchlist')
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
     cover_image = models.ImageField(blank=True)
-
+    scope_of_disclosure = models.ForeignKey(Disclosure, on_delete=models.CASCADE)
+    movies = models.ManyToManyField(Movie, blank=True, verbose_name='watchlist')

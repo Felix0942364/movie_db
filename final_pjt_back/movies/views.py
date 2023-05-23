@@ -37,8 +37,8 @@ def getDetails(request, movie_pk):
 @permission_classes([IsAuthenticated])
 def Watchlists(request):
     print('hi')
+    watchlists = get_list_or_404(WatchList, user=request.user)
     if request.method == 'GET':
-        watchlists = get_list_or_404(WatchList, user=request.user)
         serializer = WatchListSerializer(watchlists, many=True)
         return Response(serializer.data)
     
@@ -48,16 +48,15 @@ def Watchlists(request):
             serializer.save(user=request.user)
             return Response(serializer.data, status = status.HTTP_201_CREATED)
     
-    # elif request.method == 'PUT':
-    #     serializer = WatchListSerializer(watchlists, data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save()
-    #         return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = WatchListSerializer(watchlists, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
 
-    # elif request.method == 'DELETE':
-    #     watchlists.delete()
-    #     return Response(status = status.HTTP_204_NO_CONTENT)
-
+    elif request.method == 'DELETE':
+        watchlists.delete()
+        return Response(status = status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'POST'])
@@ -81,13 +80,13 @@ def Watchlist(request, watchlist_pk):
             return Response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def MountedArticle(request, pk):
-    if request.method == 'GET':
-        pass
+# @api_view(['GET', 'POST'])
+# @permission_classes([IsAuthenticated])
+# def MountedArticle(request, pk):
+#     if request.method == 'GET':
+#         pass
 
-    elif request.method == 'POST':
-        pass
+#     elif request.method == 'POST':
+#         pass
 
 

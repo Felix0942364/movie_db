@@ -6,5 +6,5 @@ urlpatterns = [
     path('details/<int:pk>', views.getDetails),
     path('watchlists/', views.Watchlists),
     path('watchlists/<int:watchlist_pk>/', views.Watchlist),
-    path('article/<int:article_pk>/mounted/', views.MountedArticle)
+    # path('article/<int:article_pk>/mounted/', views.MountedArticle)
 ]
