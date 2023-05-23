@@ -61,7 +61,7 @@ export default new Vuex.Store({
         method: 'get',
         url: 'https://api.themoviedb.org/3/movie/top_rated?',
         params:{
-          api_key: '',
+          api_key: process.env.VUE_APP_API_KEY,
           language: 'ko-KR',
           page:1
         }
