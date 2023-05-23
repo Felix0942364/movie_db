@@ -18,7 +18,8 @@ export default new Vuex.Store({
     movies: null,
     articles: null,
     watchlists: null,
-    token: null
+    token: null,
+    id: null,
   },
   getters: {
     isAuthenticated(state) {
@@ -40,10 +41,17 @@ export default new Vuex.Store({
       state.articles = null
       state.movies = null
       state.watchlists = null
+    },
+    SAVE_ID(state, id) {  
+      state.id = id
       router.push({name:'home'})
     },
     REMOVE_TOKEN(state) {
+      state.articles = null
+      state.movies = null
+      state.watchlists = null
       state.token = null
+      state.id = null 
       router.push({name:'home'})
     },
   },
@@ -59,13 +67,14 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        console.log(res.data.results)
+        // console.log(res.data.results)
         context.commit('GET_MOVIES',res.data.results)
       })
       .catch((err)=>{
         console.log(err)
       })
     },
+
     getArticles(context) {
       axios({
         method: 'get',
@@ -112,8 +121,19 @@ export default new Vuex.Store({
           username, password1, password2
         }
       })
-        .then((res) => {
-          context.commit('SAVE_TOKEN', res.data.key)
+        .then((res1) => {
+          context.commit('SAVE_TOKEN', res1.data.key)
+          axios({
+            method : 'get',
+            url : `${API_URL}/accounts/user/`,
+            headers : { Authorization : `Token ${context.state.token}` }
+          })
+            .then((res2) => {
+              console.log(res2.data)
+              context.commit('SAVE_ID', res2.data.pk)
+            })
+            .catch(err => console.log(err))
+
         })
         .catch(err => console.log(err))
         
@@ -129,8 +149,19 @@ export default new Vuex.Store({
           username, password
         }
       })
-        .then((res) => {
-          context.commit('SAVE_TOKEN', res.data.key)
+        .then((res1) => {
+          context.commit('SAVE_TOKEN', res1.data.key)
+          axios({
+            method : 'get',
+            url : `${API_URL}/accounts/user/`,
+            headers : { Authorization : `Token ${context.state.token}` }
+          })
+            .then((res2) => {
+              console.log(res2.data)
+              context.commit('SAVE_ID', res2.data.pk)
+            })
+            .catch(err => console.log(err))
+
         })
         .catch(err => console.log(err))
     },
