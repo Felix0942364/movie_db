@@ -36,10 +36,11 @@
 </template>
 <script>
 // @ is an alias to /src
-// import CKEDITOR from 'https://cdn.ckeditor.com/ckeditor5/37.1.0/super-build/ckeditor.js'
+import MovieCard from '@/components/MovieCard.vue'
 export default {
   name: 'HomeView',
   components: {
+    MovieCard
   },
   // data(){
   //   return{
