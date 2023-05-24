@@ -7,4 +7,5 @@ urlpatterns = [
     path('watchlists/', views.watchlists),
     path('watchlists/<int:watchlist_pk>/', views.watchlist),
     # path('article/<int:article_pk>/mounted/', views.MountedArticle)
+    path('genres/', views.genres)
 ]

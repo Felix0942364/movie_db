@@ -4,9 +4,11 @@ from movies.models import Genre
 
 # Create your models here.
 class User(AbstractUser):
-    nickname = models.CharField(max_length=150)
     profile_img = models.URLField(blank=True, max_length=200)
-    followers = models.ManyToManyField('self', blank=True, related_name="following")
+    following = models.ManyToManyField('self', symmetrical=False, blank=True, related_name="followers")
 
     profile_message = models.CharField(blank=True, max_length=500)
     preferences = models.ManyToManyField(Genre, blank=True)
+
+    def __str__(self):
+        return self.username

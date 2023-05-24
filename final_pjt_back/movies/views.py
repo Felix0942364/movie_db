@@ -8,8 +8,10 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import MovieListSerializer, WatchListSerializer
-from .models import Movie, WatchList
+from .serializers import MovieListSerializer, WatchListSerializer, GenreSerializer
+from .models import Movie, WatchList, Genre
+
+import json
 # Create your views here.
 
 @api_view(['GET'])
@@ -89,3 +91,8 @@ def watchlist(request, watchlist_pk):
 #         pass
 
 
+
+@api_view(['GET'])
+def genres(request):
+    
+    pass

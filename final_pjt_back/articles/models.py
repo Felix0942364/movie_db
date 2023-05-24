@@ -4,7 +4,7 @@ from django.conf import settings
 
 # Create your models here.
 class Article(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='articles', on_delete=models.CASCADE)
 
     liking_users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='liked_articles')
 

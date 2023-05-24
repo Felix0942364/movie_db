@@ -13,6 +13,7 @@
       <div class="nav-profile">
         <div v-if="this.$store.getters.isAuthenticated">
           <router-link to="/profile">My Page</router-link> 
+          <!-- <router-link to="/logout">LogOut</router-link>  -->
           <a @click="logOut">Log Out</a> 
         </div>
         <div v-else>

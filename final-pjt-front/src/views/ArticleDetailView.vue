@@ -5,7 +5,7 @@
     <!-- <p>{{ article?.content }}</p> -->
     <p>{{ article?.created_at }}</p>
     <p>{{ article?.updated_at }}</p>
-    <span v-show="computedLike"> {{ article?.article_likes_count }} </span>
+    <span v-show="article?.article_likes_count != 0"> {{ article?.article_likes_count }} </span>
     <button @click="articleLike" v-if="computedLike">♥</button>
     <button @click="articleLike" v-else>♡</button>
     <span v-if="authorIdentification">

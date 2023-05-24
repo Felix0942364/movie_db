@@ -3,8 +3,8 @@ from django.conf import settings
 
 
 class Genre(models.Model):
-    genre_ID = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=100)
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
@@ -27,7 +27,7 @@ class Movie(models.Model):
 
 
 class WatchList(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='watchlists' , on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     cover_image = models.ImageField(blank=True)
     scope_of_disclosure = models.ForeignKey(Disclosure, on_delete=models.CASCADE)

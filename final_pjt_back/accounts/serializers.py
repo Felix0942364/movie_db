@@ -1,17 +1,52 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from articles.models import Article, Comment
+from movies.serializers import WatchListSerializer
 
-
-class UserSerializer(serializers.ModelSerializer):
-    # article_set = 아티클 셋, 코멘트셋, watchlist 불러서 알고리즘 작성할 것
-    # 알고리즘 작성은 backend에서 진행 예정
+class UserSimplifiedSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'profile_img', 'profile_message', 'followers', 'preferences')
+        fields = ('id', 'username', 'profile_img')
+
+class ArticleSimplifiedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ('author', 'id', 'title')
+
+class CommentSimplifiedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('id', 'article', 'content')
+
+class ProfileSerializer(serializers.ModelSerializer):
+    followers = UserSimplifiedSerializer(many=True, read_only=True)
+    following = UserSimplifiedSerializer(many=True, read_only=True)
+    articles = ArticleSimplifiedSerializer(many=True, read_only=True)
+    comments = CommentSimplifiedSerializer(many=True, read_only=True)
+    liked_articles = ArticleSimplifiedSerializer(many=True, read_only=True)
+    liked_comments = CommentSimplifiedSerializer(many=True, read_only=True)
+    
+    watchlists = WatchListSerializer(many = True, read_only=True)
+    
+    class Meta:
+        model = get_user_model()
+        fields = (
+            'id',
+            'username',
+            'profile_img',
+            'profile_message',
+            'preferences',
+            'followers',
+            'following',
+            'articles',
+            'comments',
+            'liked_articles',
+            'liked_comments',
+            'watchlists',
+        )
 
 class FollowingSerializer(serializers.ModelSerializer):
-    followings = UserSerializer(read_only=True)
-
+    followings = UserSimplifiedSerializer(read_only=True)
     class Meta:
         model = get_user_model()
         fields = ('id', 'username', 'profile_img')

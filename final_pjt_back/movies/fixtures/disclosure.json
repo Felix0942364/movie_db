@@ -1,0 +1,16 @@
+[
+{
+    "model": "movies.disclosure",
+    "pk": 1,
+    "fields": {
+        "name": "공개"
+    }
+},
+{
+    "model": "movies.disclosure",
+    "pk": 2,
+    "fields": {
+        "name": "비공개"
+    }
+}
+]
