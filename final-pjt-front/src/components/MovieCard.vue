@@ -4,7 +4,8 @@
         <img :src='pURL+movie.poster_path' class="card-img-top h-100"> 
     </div>
     <div class="card h-100 back-face">
-      <h5 class="card-title" style="font-weight: bold;">{{ movie.title }}</h5>
+      <h4 class="card-title" style="font-weight: bold;">{{ movie.title }}</h4>
+      <h5 class="card-subtitle">{{ movie.tagline }}</h5>
       <p class="card-text">{{ movie.overview }}</p>
     </div>
   </div>
@@ -23,20 +24,24 @@ export default {
 </script>
 
 <style scoped>
+/* .card{
+    min-width: 200px;
+} */
 .card-text {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+  font-size:10%
 }
 
 ::selection{
   color: #e2742a;
 }
 .wrapper{
-  height: 400px;
-  width: 320px;
+  height: 150px;
+  width: 100px;
   position: relative;
   transform-style: preserve-3d;
   perspective: 1000px;
