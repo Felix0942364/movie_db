@@ -3,9 +3,21 @@
     <div class="Home-head">
       <img width="120px" src="@/assets/img/big_logo_white.png">
     </div>
-    <div class="Home-body wrapper">
-      <div class="Popular_Year">
-        <div class="popular-list row row-cols-1 row-cols-md-5 gy-3"
+    <div class="Home-body ">
+      <div class="container mb-5" id="recomendate">
+        <h1 class="d-flex justify-content-start">Recomendate</h1>
+        <div class="popular-list row gy-3 "
+        :style="{ transform: `translateX(${slideOffset}px)` }"
+        @wheel="handleWheel">
+          <MovieCard 
+          v-for="(movie, idx) in visibleSlides"
+          :key="idx"
+          :movie="movie"/>
+        </div>
+      </div>  
+      <div class="Popular_Year container">
+        <h1 class="d-flex justify-content-start">Popular_Year</h1>
+        <div class="popular-list row gy-3 "
         :style="{ transform: `translateX(${slideOffset}px)` }"
         @wheel="handleWheel">
           <MovieCard 
@@ -28,10 +40,7 @@ export default {
   data(){
     return{
       currentSlide: 0,
-      slideWidth: 20,
-      currentOffset: 0,
-      containerWidth: 900,
-      maxSlides: 9,
+      maxSlides: 5,
       TrendingList : []
     }
   },
@@ -42,8 +51,8 @@ export default {
       this.TrendingList = this.$store.state.movies
     },
     handleWheel(event) {
+      // this.UpdatemaxSlides()
       event.preventDefault(); // Prevent default scrolling behavior
-      
       const delta = Math.sign(event.deltaY); // Get the direction of the mouse wheel
       if (delta > 0) {
         // Scrolling down (next slide)
@@ -59,16 +68,30 @@ export default {
         } else {
           this.currentSlide = this.TrendingList.length - this.maxSlides; // Wrap to the end
         }
-      
       }
+    },
+    UpdatemaxSlides(){
+      const container = document.querySelector('.popular-list');
+      var containerWidth = container?.clientWidth ? container.clientWidth : 1200 
+      // Determine the number of visible slides based on Bootstrap breakpoints
+      if (containerWidth >= 1200) {
+        this.maxSlides= 5; // Number of slides for large screens (>= 1200px)
+        } else if (containerWidth >= 992) {
+          this.maxSlides= 4; // Number of slides for medium screens (992px - 1199px)
+        } else if (containerWidth >= 768) {
+          this.maxSlides= 3; // Number of slides for small screens (768px - 991px)
+        } else if (containerWidth >= 576) {
+          this.maxSlides= 2; // Number of slides for extra small screens (576px - 767px)
+        } else {
+          this.maxSlides= 1; // Number of slides for extra small screens (< 576px)
+        }
     },
   },
   computed:{
+    
     visibleSlides() {
-    const maxSlides = Math.floor(this.containerWidth / (this.slideWidth * this.containerWidth / 100));
     const startIndex = this.currentSlide;
-    const endIndex = this.currentSlide + maxSlides - 1;
-    console.log(maxSlides)
+    const endIndex = this.currentSlide + this.maxSlides - 1;
     return this.TrendingList.slice(startIndex, endIndex + 1);
   },
     slideOffset() {
@@ -78,8 +101,7 @@ export default {
   },
   created(){
     this.getMovies()
-    this.containerWidth = document.getElementById('popular-list').clientWidth;
-  }
+  },
 
 }
 </script>
