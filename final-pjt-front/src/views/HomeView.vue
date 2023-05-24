@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="Home-head">
-      <img width="120px" src="@/assets/img/big_logo_white.png">
+      <!-- <img width="120px" src="@/assets/img/big_logo_white.png"> -->
+      <MainAdvertise :movie_id="visibleSlides[0].id" />
     </div>
     <div class="Home-body ">
       <div class="container mb-5" id="recomendate">
-        <h1 class="d-flex justify-content-start">Recomendate</h1>
-        <div class="popular-list row gy-3 "
+        <h3 class="d-flex justify-content-start">Recomendate</h3>
+        <div class="Recomendate-list row gy-3 "
         :style="{ transform: `translateX(${slideOffset}px)` }"
         @wheel="handleWheel">
           <MovieCard 
@@ -15,8 +16,19 @@
           :movie="movie"/>
         </div>
       </div>  
-      <div class="Popular_Year container">
-        <h1 class="d-flex justify-content-start">Popular_Year</h1>
+      <div class="container mb-5" id="recently">
+        <h3 class="d-flex justify-content-start">Recently</h3>
+        <div class="Recently-list row gy-3 "
+        :style="{ transform: `translateX(${slideOffset}px)` }"
+        @wheel="handleWheel">
+          <MovieCard 
+          v-for="(movie, idx) in visibleSlides"
+          :key="idx"
+          :movie="movie"/>
+        </div>
+      </div>  
+      <div class="container mb-5" id="popular">
+        <h3 class="d-flex justify-content-start">Popular_Year</h3>
         <div class="popular-list row gy-3 "
         :style="{ transform: `translateX(${slideOffset}px)` }"
         @wheel="handleWheel">
@@ -32,16 +44,18 @@
 <script>
 // @ is an alias to /src
 import MovieCard from '@/components/MovieCard.vue'
+import MainAdvertise from '@/components/MainAdvertise.vue'
 export default {
   name: 'HomeView',
   components: {
-    MovieCard
+    MovieCard,
+    MainAdvertise
   },
   data(){
     return{
       currentSlide: 0,
       maxSlides: 5,
-      TrendingList : []
+      TrendingList : [],
     }
   },
 
@@ -88,7 +102,6 @@ export default {
     },
   },
   computed:{
-    
     visibleSlides() {
     const startIndex = this.currentSlide;
     const endIndex = this.currentSlide + this.maxSlides - 1;
@@ -99,20 +112,22 @@ export default {
       return -this.currentSlide * this.slideWidth * this.containerWidth / 100;
     },
   },
+  mounted(){
+  },
   created(){
     this.getMovies()
-  },
+  }
 
 }
 </script>
 
 
-<style>
+<style scoped>
 .Home-body {
   overflow: hidden;
 }
 
-.popular-list {
+.popular-list, .Recomendate-list, .Recently-list{
   display: flex;
   transition: transform 0.5s;
   flex-wrap: nowrap; /* Prevent slides from wrapping */
