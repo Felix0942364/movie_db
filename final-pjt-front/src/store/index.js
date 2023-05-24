@@ -18,8 +18,9 @@ export default new Vuex.Store({
     id: null,
     token: null,
     watchlists: null,
-    movies: null,
-    movie: null,
+    Recomendation:null,
+    Recently:null,
+    Popular:null,
   },
   getters: {
     isAuthenticated(state) {
@@ -27,8 +28,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    GET_MOVIES(state, movies){
-      state.movies = movies
+    GET_MOVIES(state, payload){
+      state.Recomendation = payload['Recomendation']
+      state.Recently =  payload['Recently']
+      state.Popular =  payload['Popular']
     },
     GET_WATCHLIST(state, watchlists) {
       state.watchlists = watchlists
@@ -54,22 +57,39 @@ export default new Vuex.Store({
   },
   actions: {
     getMovies(context){
-      axios({
-        method: 'get',
-        url: 'https://api.themoviedb.org/3/movie/top_rated?',
-        params:{
-          api_key: process.env.VUE_APP_API_KEY,
-          language: 'ko-KR',
-          page:1
-        }
-      })
-      .then((res)=>{
-        // console.log(res.data.results)
-        context.commit('GET_MOVIES',res.data.results)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+      const requests = [
+        axios.get('https://api.themoviedb.org/3/movie/top_rated', {
+          params: {
+            api_key: process.env.VUE_APP_TMDB_KEY,
+            language: 'ko-KR',
+            page: 1
+          }
+        }),
+        axios.get('https://api.themoviedb.org/3/movie/popular', {
+          params: {
+            api_key: process.env.VUE_APP_TMDB_KEY,
+            language: 'ko-KR',
+            page: 1
+          }
+        }),
+        axios.get('https://api.themoviedb.org/3/movie/now_playing', {
+          params: {
+            api_key: process.env.VUE_APP_TMDB_KEY,
+            language: 'ko-KR',
+            page: 1
+          }
+        })
+      ];
+    
+      axios
+        .all(requests)
+        .then(axios.spread((res1, res2, res3) => {
+          const payload = {'Recomendation': res1.data.results, 'Recently': res2.data.results, 'Popular': res3.data.results}
+          context.commit('GET_MOVIES',payload);
+        }))
+        .catch((err) => {
+          console.log(err);
+        });
     },
     
     getMyWatchList(context) {
@@ -81,7 +101,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-        // console.log(res, context)
           context.commit('GET_WATCHLIST', res.data)
         })
         .catch((err) => {

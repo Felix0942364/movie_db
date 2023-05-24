@@ -1,145 +1,144 @@
 <template>
   <div>
     <div class="Home-head">
-      <!-- <img width="120px" src="@/assets/img/big_logo_white.png"> -->
-      <MainAdvertise :movie_id="visibleSlides[0].id" />
+      <MainAdvertise  :movie_id="visibleSlidesRecomendate.length > 0 ? visibleSlidesRecomendate[0].id :238"  />
     </div>
-    <div class="Home-body ">
-      <div class="container mb-5" id="recomendate">
-        <h3 class="d-flex justify-content-start">Recomendate</h3>
-        <div class="Recomendate-list row gy-3 "
-        :style="{ transform: `translateX(${slideOffset}px)` }"
-        @wheel="handleWheel">
-          <MovieCard 
-          v-for="(movie, idx) in visibleSlides"
-          :key="idx"
-          :movie="movie"/>
-        </div>
-      </div>  
-      <div class="container mb-5" id="recently">
-        <h3 class="d-flex justify-content-start">Recently</h3>
-        <div class="Recently-list row gy-3 "
-        :style="{ transform: `translateX(${slideOffset}px)` }"
-        @wheel="handleWheel">
-          <MovieCard 
-          v-for="(movie, idx) in visibleSlides"
-          :key="idx"
-          :movie="movie"/>
-        </div>
-      </div>  
-      <div class="container mb-5" id="popular">
-        <h3 class="d-flex justify-content-start">Popular_Year</h3>
-        <div class="popular-list row gy-3 "
-        :style="{ transform: `translateX(${slideOffset}px)` }"
-        @wheel="handleWheel">
-          <MovieCard 
-          v-for="(movie, idx) in visibleSlides"
-          :key="idx"
-          :movie="movie"/>
-        </div>
-      </div>
-    </div> 
+    <div class="Home-body" v-if="Recently">
+      <MovieList title="Recomendate" :movies="visibleSlidesRecomendate" @wheel="handleWheelRecomendate" />
+      <MovieList title="Recently" :movies="visibleSlidesRecently" @wheel="handleWheelRecently" />
+      <MovieList title="Popular" :movies="visibleSlidesPopular" @wheel="handleWheelPopular" />
+    </div>
   </div>
 </template>
-<script>
-// @ is an alias to /src
-import MovieCard from '@/components/MovieCard.vue'
-import MainAdvertise from '@/components/MainAdvertise.vue'
-export default {
-  name: 'HomeView',
-  components: {
-    MovieCard,
-    MainAdvertise
-  },
-  data(){
-    return{
-      currentSlide: 0,
-      maxSlides: 5,
-      TrendingList : [],
-    }
-  },
 
-  methods:{
+<script>
+import MovieList from "@/components/MovieList.vue";
+import MainAdvertise from "@/components/MainAdvertise.vue";
+
+export default {
+  name: "HomeView",
+  components: {
+    MovieList,
+    MainAdvertise,
+  },
+  data() {
+    return {
+      currentSlideRecomendate: 0,
+      currentSlideRecently: 0,
+      currentSlidePopular: 0,
+      maxSlides: 5,
+      Recomendation:[],
+      Recently:[],
+      Popular:[]
+    };
+  },
+  methods: {
     getMovies(){
       this.$store.dispatch('getMovies')
-      this.TrendingList = this.$store.state.movies
+      this.Recomendation = this.$store.state.Recomendation
+      this.Recently = this.$store.state.Recently
+      this.Popular = this.$store.state.Popular
     },
-    handleWheel(event) {
-      // this.UpdatemaxSlides()
-      event.preventDefault(); // Prevent default scrolling behavior
-      const delta = Math.sign(event.deltaY); // Get the direction of the mouse wheel
+    // Separate handleWheel methods for each list
+    handleWheelRecomendate(event) {
+      event.preventDefault();
+      const delta = Math.sign(event.deltaY);
       if (delta > 0) {
         // Scrolling down (next slide)
-        if (this.currentSlide < this.TrendingList.length - this.maxSlides) {
-          this.currentSlide++;
+        if (this.currentSlideRecomendate < this.Recomendation.length - this.maxSlides) {
+          this.currentSlideRecomendate++;
         } else {
-          this.currentSlide = 0; // Wrap to the beginning
+          this.currentSlideRecomendate = 0; // Wrap to the beginning
         }
       } else {
         // Scrolling up (previous slide)
-        if (this.currentSlide > 0) {
-          this.currentSlide--;
+        if (this.currentSlideRecomendate > 0) {
+          this.currentSlideRecomendate--;
         } else {
-          this.currentSlide = this.TrendingList.length - this.maxSlides; // Wrap to the end
+          this.currentSlideRecomendate = this.Recomendation.length - this.maxSlides; // Wrap to the end
         }
       }
     },
-    UpdatemaxSlides(){
-      const container = document.querySelector('.popular-list');
-      var containerWidth = container?.clientWidth ? container.clientWidth : 1200 
-      // Determine the number of visible slides based on Bootstrap breakpoints
-      if (containerWidth >= 1200) {
-        this.maxSlides= 5; // Number of slides for large screens (>= 1200px)
-        } else if (containerWidth >= 992) {
-          this.maxSlides= 4; // Number of slides for medium screens (992px - 1199px)
-        } else if (containerWidth >= 768) {
-          this.maxSlides= 3; // Number of slides for small screens (768px - 991px)
-        } else if (containerWidth >= 576) {
-          this.maxSlides= 2; // Number of slides for extra small screens (576px - 767px)
+    handleWheelRecently(event) {
+      event.preventDefault();
+      const delta = Math.sign(event.deltaY);
+      if (delta > 0) {
+        // Scrolling down (next slide)
+        if (this.currentSlideRecently < this.Recently.length - this.maxSlides) {
+          this.currentSlideRecently++;
         } else {
-          this.maxSlides= 1; // Number of slides for extra small screens (< 576px)
+          this.currentSlideRecently = 0; // Wrap to the beginning
         }
+      } else {
+        // Scrolling up (previous slide)
+        if (this.currentSlideRecently > 0) {
+          this.currentSlideRecently--;
+        } else {
+          this.currentSlideRecently = this.Recently.length - this.maxSlides; // Wrap to the end
+        }
+      }
     },
+    handleWheelPopular(event) {
+      event.preventDefault();
+      const delta = Math.sign(event.deltaY);
+      if (delta > 0) {
+        // Scrolling down (next slide)
+        if (this.currentSlidePopular < this.Popular.length - this.maxSlides) {
+          this.currentSlidePopular++;
+        } else {
+          this.currentSlidePopular = 0; // Wrap to the beginning
+        }
+      } else {
+        // Scrolling up (previous slide)
+        if (this.currentSlidePopular > 0) {
+          this.currentSlidePopular--;
+        } else {
+          this.currentSlidePopular = this.Popular.length - this.maxSlides; // Wrap to the end
+        }
+      }
+    },
+  },
+  created() {
+    // Fetch the complete movie list for all three categories
+    this.getMovies();
   },
   computed:{
-    visibleSlides() {
-    const startIndex = this.currentSlide;
-    const endIndex = this.currentSlide + this.maxSlides - 1;
-    return this.TrendingList.slice(startIndex, endIndex + 1);
-  },
-    slideOffset() {
-      // Calculate the horizontal offset to move the slides
-      return -this.currentSlide * this.slideWidth * this.containerWidth / 100;
+    // Separate computed properties for each list
+    visibleSlidesRecomendate() {
+      if(!this.Recomendation){return []}
+      const startIndex = this.currentSlideRecomendate;
+      const endIndex = this.currentSlideRecomendate + this.maxSlides - 1;
+      return this.Recomendation.slice(startIndex, endIndex + 1);
     },
-  },
-  mounted(){
-  },
-  created(){
-    this.getMovies()
+    visibleSlidesRecently() {
+      if(!this.Recently){return []}
+      const startIndex = this.currentSlideRecently;
+      const endIndex = this.currentSlideRecently + this.maxSlides - 1;
+      return this.Recently.slice(startIndex, endIndex + 1);
+    },
+    visibleSlidesPopular() {
+      if(!this.Popular){return []}
+      const startIndex = this.currentSlidePopular;
+      const endIndex = this.currentSlidePopular + this.maxSlides - 1;
+      return this.Popular.slice(startIndex, endIndex + 1);
+    },
+    isDataLoaded() {
+    return this.Recomendation && this.Recently && this.Popular;
+    },
   }
-
-}
+};
 </script>
-
 
 <style scoped>
 .Home-body {
-  overflow: hidden;
-}
-
-.popular-list, .Recomendate-list, .Recently-list{
   display: flex;
-  transition: transform 0.5s;
-  flex-wrap: nowrap; /* Prevent slides from wrapping */
-  overflow: hidden; /* Hide overflow for responsive behavior */
+  flex-direction: column;
+  align-items: stretch;
 }
-
-
-.slide {
-  flex: 0 0 auto; /* Allow slides to shrink and grow based on container width */
-  width: 100%; /* Occupy full width of the container */
-  max-width: 20%; /* Maximum width for each slide */
-  box-sizing: border-box; /* Include padding and border in width calculation */
+.Home-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 </style>
