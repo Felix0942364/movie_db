@@ -11,7 +11,7 @@
 <script>
 import ArticleListItem from '@/components/ArticleListItem.vue'
 import axios from 'axios'
-
+ 
 export default {
   name: 'ArticleListView',
   data() {
