@@ -23,6 +23,8 @@
       </div>
     </nav>
     <router-view/>
+    <footer>
+    </footer>
   </div>
 </template>
 
