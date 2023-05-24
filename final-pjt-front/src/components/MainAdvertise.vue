@@ -1,17 +1,20 @@
 <template>
-  <div class="card mx-3 mb-5">
-    <img :src="pURL + MainMovie.backdrop_path" class="card-img" style="opacity: 0.4;"> 
-    <div class="card-img-overlay d-flex align-items-center">
-      <img :src="pURL + MainMovie.poster_path" class="img-thumbnail" style="max-height: 400px;">
-      <div class="d-flex flex-column ms-5">
-        <h1 class="card-title mb-5 mt-0" style="font-weight: bold;">{{ MainMovie.title }}</h1>
-        <h5 class="card-text-bg-dark">{{ MainMovie.tagline }}</h5>
-        <p style="text-overflow: ellipsis;" class="card-text-bg-dark">{{ MainMovie.overview }}</p>
-      </div> 
+  <div class="card mx-3 mb-5" style="">
+    <img v-if="MainMovie" :src="pURL + MainMovie.backdrop_path" class="card-img" style="opacity: 0.2; max-height:650px;">
+    <div class="card-img-overlay d-flex align-items-center card-overlay">
+      <div class="d-flex mx-5 me-5 overlay-content">
+        <div class="me-4">
+          <img v-if="MainMovie" :src="pURL + MainMovie.poster_path" class="img-thumbnail" style="max-width: 400px;">
+        </div>
+        <div class="d-flex flex-column justify-content-center">
+          <h1 class="card-title mb-4" style="font-weight: bold;" v-if="MainMovie">{{ MainMovie.title }}</h1>
+          <h5 class="card-text-bg-dark" v-if="MainMovie">{{ MainMovie.tagline }}</h5>
+          <p style="text-overflow: ellipsis;" class="card-text-bg-dark" v-if="MainMovie">{{ MainMovie.overview }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
 
@@ -50,6 +53,14 @@ export default {
       return this.mainMovie
     }
   },
+  watch: {
+    movie_id(newVal) {
+      this.getMovieDetail(newVal)
+        .then((data) => {
+          this.mainMovie = data
+        })
+    }
+  },
   mounted() {
     this.getMovieDetail(this.movie_id)
       .then((data) => {
@@ -57,7 +68,18 @@ export default {
       })
   }
 }
+
+
 </script>
 
 <style scoped>
+.card-overlay {
+  max-height: 1000px;
+  overflow-y: auto;
+}
+
+.overlay-content {
+  max-width: 100%;
+  padding-right: 1rem; /* Add some padding to prevent content from sticking to the edge */
+}
 </style>

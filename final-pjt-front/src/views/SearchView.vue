@@ -4,7 +4,7 @@
       <input type="searchInput" id="searchInput" v-model="searchInput">
       <input type="submit" value="search">
     </form>
-    <SingleMovie
+    <MovieCard
     v-for="movie in movies"
     :key="movie.id"
     :movie="movie"
@@ -14,12 +14,11 @@
 
 <script>
 import axios from 'axios'
-import SingleMovie from '@/components/SingleMovie.vue'
-
+import MovieCard from '@/components/MovieCard.vue'
 export default {
   name: 'SearchView',
   components: {
-    SingleMovie
+    MovieCard
   },
   data() {
     return {
