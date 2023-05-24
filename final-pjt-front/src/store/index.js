@@ -19,6 +19,7 @@ export default new Vuex.Store({
     token: null,
     watchlists: null,
     movies: null,
+    movie: null,
   },
   getters: {
     isAuthenticated(state) {
@@ -87,6 +88,7 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+
 
     signUp(context, payload) {
       const username = payload.username
