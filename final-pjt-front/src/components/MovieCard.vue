@@ -32,7 +32,7 @@ export default {
 }
 
 ::selection{
-  color: #fff;
+  color: #e2742a;
 }
 .wrapper{
   height: 400px;
@@ -46,7 +46,7 @@ export default {
   height: 100%;
   width: 100%;
   padding: 5px;
-  background: #fff;
+  background: #f8d2b1;
   border-radius: 5%;
   transform: translateY(0deg);
   transform-style: preserve-3d;
@@ -55,6 +55,7 @@ export default {
   transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
 }
 .wrapper:hover > .front-face{
+  transition-delay:0.5s;
   transform: rotateY(-180deg);
 }
 .wrapper .card img{
@@ -71,6 +72,7 @@ export default {
   transform: rotateY(180deg);
 }
 .wrapper:hover > .back-face{
+  transition-delay:0.5s;
   transform: rotateY(0deg);
 }
 .wrapper .back-face img{
@@ -87,22 +89,10 @@ export default {
   font-size: 30px;
   font-weight: 500;
 }
-.back-face ul{
+/* .back-face ul{
   display: flex;
-}
-.back-face ul a{
-  display: block;
-  height: 40px;
-  width: 40px;
-  color: #fff;
-  text-align: center;
-  margin: 0 5px;
-  line-height: 38px;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  background: linear-gradient(375deg, #1cc7d0, #2ede98);
-  transition: all 0.5s ease;
-}
+} */
+
 .back-face ul a:hover{
   color: #1cc7d0;
   border-color: #1cc7d0;
