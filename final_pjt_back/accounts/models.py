@@ -8,4 +8,5 @@ class User(AbstractUser):
     profile_img = models.URLField(blank=True, max_length=200)
     followers = models.ManyToManyField('self', blank=True, related_name="following")
 
+    profile_message = models.CharField(blank=True, max_length=500)
     preferences = models.ManyToManyField(Genre, blank=True)

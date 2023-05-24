@@ -19,7 +19,7 @@ def profile(request, user_pk):
 
     elif request.method == 'POST':
         if (request.user.pk != user_pk):
-            return Response({"you couldn't edit none but your profile"})
+            return Response({"could edit no other than your profile"})
         user = get_object_or_404(get_user_model(), pk = request.user)
 
 

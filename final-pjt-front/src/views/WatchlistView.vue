@@ -4,7 +4,11 @@
     <h2>고사리가 맛있다</h2>
     <!-- <button @click="addWatchList">추가하기</button> -->
     <form @submit.prevent="addWatchList">
-      <input type="text" id="newWatchlist" v-model="newWatchlist"><br>
+      <select v-model="disclosure">
+        <option :value="1">공개</option>
+        <option :value="2">비공개</option>
+      </select>
+      <input type="text" id="newWatchlist" v-model="newWatchlistTitle"><br>
       <input type="submit" id="submit">
     </form>
     <WatchLists
@@ -27,7 +31,8 @@ export default {
   },
   data() {
     return {
-      newWatchlist:"",
+      newWatchlistTitle:"",
+      disclosure:"",
     }
   },
   created () {
@@ -38,12 +43,15 @@ export default {
       this.$store.dispatch('getMyWatchList')
     },
     addWatchList() {
-      const title = this.newWatchlist 
-      console.log(title, this.$store.state.token)
+      if (!this.newWatchlistTitle) alert('내용을 입력해주세요.')
+      else if (!this.disclosure) alert('공개 여부를 설정해 주세요.')
       axios({
         method : 'post',
         url: `${API_URL}/api/watchlists/`,
-        data: { title },
+        data: {
+          title: this.newWatchlistTitle,
+          scope_of_disclosure: this.disclosure
+          },
         headers: {
           Authorization : `Token ${this.$store.state.token}`
         }

@@ -135,3 +135,13 @@ a {
 
   transform: translateX(-50%) translateY(-50%);
 } */
+
+.profile > img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+
+  background-color: white;
+}

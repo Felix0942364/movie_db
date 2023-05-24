@@ -87,13 +87,14 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const auth = store.getters["isAuthenticated"]
   const authPages = [
+    'home',
     'search',
     'community',
     'articledetail',
     'createArticle',
     'watchlists',
     'articlelist',
-    'profile'
+    'profile',
   ]
   const isAuthRequired = authPages.includes(to.name)
   
