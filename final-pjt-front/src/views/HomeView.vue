@@ -6,7 +6,7 @@
     </div>
     <div class="Home-body ">
       <div class="container mb-5" id="recomendate">
-        <h3 class="d-flex justify-content-start">Recomendate</h3>
+        <h3 class="d-flex justify-content-start">Recommendations</h3>
         <div class="Recomendate-list row gy-3 "
         :style="{ transform: `translateX(${slideOffset}px)` }"
         @wheel="handleWheel">

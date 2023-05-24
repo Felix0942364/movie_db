@@ -32,7 +32,7 @@ export default {
         method: 'get',
         url: `https://api.themoviedb.org/3/movie/${id}`,
         params: {
-          api_key: process.env.VUE_APP_API_KEY,
+          api_key: process.env.VUE_APP_TMDB_KEY,
           language: 'ko-KR',
           page: 1
         }

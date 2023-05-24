@@ -56,9 +56,9 @@ export default new Vuex.Store({
     getMovies(context){
       axios({
         method: 'get',
-        url: 'https://api.themoviedb.org/3/movie/top_rated?',
+        url: 'https://api.themoviedb.org/3/movie/top_rated',
         params:{
-          api_key: process.env.VUE_APP_API_KEY,
+          api_key: process.env.VUE_APP_TMDB_KEY,
           language: 'ko-KR',
           page:1
         }

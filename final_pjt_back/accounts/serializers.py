@@ -20,7 +20,9 @@ class CommentSimplifiedSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     followers = UserSimplifiedSerializer(many=True, read_only=True)
+    followers_count = serializers.IntegerField(source='followers.count', read_only=True)
     following = UserSimplifiedSerializer(many=True, read_only=True)
+    following_count = serializers.IntegerField(source='following.count', read_only=True)
     articles = ArticleSimplifiedSerializer(many=True, read_only=True)
     comments = CommentSimplifiedSerializer(many=True, read_only=True)
     liked_articles = ArticleSimplifiedSerializer(many=True, read_only=True)
@@ -36,7 +38,9 @@ class ProfileSerializer(serializers.ModelSerializer):
             'profile_img',
             'profile_message',
             'preferences',
+            'followers_count',
             'followers',
+            'following_count',
             'following',
             'articles',
             'comments',

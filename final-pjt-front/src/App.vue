@@ -22,8 +22,9 @@
         </div>
       </div>
     </nav>
-    <br>
     <router-view/>
+    <footer>
+    </footer>
   </div>
 </template>
 
