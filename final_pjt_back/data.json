@@ -1,0 +1,1274 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$5IRUnleHHqGLrSEo5DK1cu$c2/sq2z6eKnepr3i1UBJY//JEEKhRK9g69EdGwAs3aQ=",
+        "last_login": "2023-05-25T15:47:36.295Z",
+        "is_superuser": false,
+        "username": "이동진",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-05-25T15:47:36.149Z",
+        "profile_img": "image/move_real.jpg",
+        "profile_message": "안녕하세요 이동진입니다. 제 점수는요",
+        "groups": [],
+        "user_permissions": [],
+        "following": [
+            2
+        ],
+        "preferences": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$yNcSLIquBLK4cmUayBcJsq$XQtEl5vHs4wnBy6bhbpVoXNLBtpDcEORARB53OlgVxk=",
+        "last_login": "2023-05-25T15:54:02.073Z",
+        "is_superuser": false,
+        "username": "김혜리",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-05-25T15:54:01.912Z",
+        "profile_img": "image/kim.jpg",
+        "profile_message": "김혜리 영화평론가입니다. 제정\"신\"님을 뵈러 왔습니다.",
+        "groups": [],
+        "user_permissions": [],
+        "following": [],
+        "preferences": []
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+        "author": 2,
+        "title": "김혜리의 영화 추천 10선",
+        "content": "<p>김혜리의 영화 추천 10선</p>",
+        "created_at": "2023-05-25T15:57:46.711Z",
+        "updated_at": "2023-05-25T15:57:46.711Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 3,
+    "fields": {
+        "author": 1,
+        "title": "이동진의 영화 10선",
+        "content": "<p>첫번째 올드보이</p>",
+        "created_at": "2023-05-25T16:11:12.428Z",
+        "updated_at": "2023-05-25T16:11:12.428Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 4,
+    "fields": {
+        "author": 1,
+        "title": "좋은 영상 있어 공유드립니다.",
+        "content": "<p>제곧내</p><figure class=\"media\"><div data-oembed-url=\"https://youtu.be/yWm4PtbdxUA\"><div style=\"position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;\"><iframe src=\"https://www.youtube.com/embed/yWm4PtbdxUA\" style=\"position: absolute; width: 100%; height: 100%; top: 0; left: 0;\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen=\"\"></iframe></div></div></figure>",
+        "created_at": "2023-05-25T16:19:02.655Z",
+        "updated_at": "2023-05-25T16:19:02.655Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 3,
+    "fields": {
+        "article": 2,
+        "author": 1,
+        "content": "혜리님 좋은 영화 추천해주셔서 감사합니다.",
+        "created_at": "2023-05-25T16:13:28.368Z",
+        "updated_at": "2023-05-25T16:13:28.368Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 4,
+    "fields": {
+        "article": 4,
+        "author": 1,
+        "content": "와! 카리나!",
+        "created_at": "2023-05-25T16:20:44.021Z",
+        "updated_at": "2023-05-25T16:20:44.021Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 5,
+    "fields": {
+        "article": 3,
+        "author": 1,
+        "content": "진짜 인생영화 입니다",
+        "created_at": "2023-05-25T16:32:07.918Z",
+        "updated_at": "2023-05-25T16:32:07.918Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 6,
+    "fields": {
+        "article": 3,
+        "author": 1,
+        "content": "와 만두!",
+        "created_at": "2023-05-25T17:36:42.297Z",
+        "updated_at": "2023-05-25T17:36:42.297Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 7,
+    "fields": {
+        "article": 3,
+        "author": 1,
+        "content": "장도리가 갑입니다",
+        "created_at": "2023-05-25T17:47:32.331Z",
+        "updated_at": "2023-05-25T17:47:32.331Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "articles.comment",
+    "pk": 9,
+    "fields": {
+        "article": 2,
+        "author": 1,
+        "content": "ㄴㅇㄹㄴㅇㄹ",
+        "created_at": "2023-05-25T17:58:05.554Z",
+        "updated_at": "2023-05-25T17:58:05.554Z",
+        "liking_users": [
+            1
+        ]
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 12,
+    "fields": {
+        "name": "Adventure"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 14,
+    "fields": {
+        "name": "Fantasy"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 16,
+    "fields": {
+        "name": "Animation"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 18,
+    "fields": {
+        "name": "Drama"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 27,
+    "fields": {
+        "name": "Horror"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 28,
+    "fields": {
+        "name": "Action"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 35,
+    "fields": {
+        "name": "Comedy"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 36,
+    "fields": {
+        "name": "History"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 37,
+    "fields": {
+        "name": "Western"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 53,
+    "fields": {
+        "name": "Thriller"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 80,
+    "fields": {
+        "name": "Crime"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 99,
+    "fields": {
+        "name": "Documentary"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 878,
+    "fields": {
+        "name": "Science Fiction"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 9648,
+    "fields": {
+        "name": "Mystery"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 10402,
+    "fields": {
+        "name": "Music"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 10749,
+    "fields": {
+        "name": "Romance"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 10751,
+    "fields": {
+        "name": "Family"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 10752,
+    "fields": {
+        "name": "War"
+    }
+},
+{
+    "model": "movies.genre",
+    "pk": 10770,
+    "fields": {
+        "name": "TV Movie"
+    }
+},
+{
+    "model": "movies.disclosure",
+    "pk": 1,
+    "fields": {
+        "name": "공개"
+    }
+},
+{
+    "model": "movies.disclosure",
+    "pk": 2,
+    "fields": {
+        "name": "비공개"
+    }
+},
+{
+    "model": "movies.watchlist",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "title": "제정\"신\"의 재생목록",
+        "cover_image": "",
+        "scope_of_disclosure": 2,
+        "movies": []
+    }
+},
+{
+    "model": "movies.watchlist",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "title": "제정\"신\"을 위하여",
+        "cover_image": "",
+        "scope_of_disclosure": 2,
+        "movies": []
+    }
+},
+{
+    "model": "movies.watchlist",
+    "pk": 3,
+    "fields": {
+        "user": 1,
+        "title": "제정\"신\"을 위하여",
+        "cover_image": "",
+        "scope_of_disclosure": 2,
+        "movies": []
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "4724425d63a62ef727a892b450e6517879459414",
+    "fields": {
+        "user": 1,
+        "created": "2023-05-25T15:47:36.272Z"
+    }
+},
+{
+    "model": "authtoken.token",
+    "pk": "7b200d88127b43e7684422634f7478bb41ab8742",
+    "fields": {
+        "user": 2,
+        "created": "2023-05-25T15:54:02.046Z"
+    }
+},
+{
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+        "domain": "example.com",
+        "name": "example.com"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 1,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 1,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 1,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 1,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add article",
+        "content_type": 2,
+        "codename": "add_article"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change article",
+        "content_type": 2,
+        "codename": "change_article"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete article",
+        "content_type": 2,
+        "codename": "delete_article"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view article",
+        "content_type": 2,
+        "codename": "view_article"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add comment",
+        "content_type": 3,
+        "codename": "add_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change comment",
+        "content_type": 3,
+        "codename": "change_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete comment",
+        "content_type": 3,
+        "codename": "delete_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view comment",
+        "content_type": 3,
+        "codename": "view_comment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add disclosure",
+        "content_type": 4,
+        "codename": "add_disclosure"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change disclosure",
+        "content_type": 4,
+        "codename": "change_disclosure"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete disclosure",
+        "content_type": 4,
+        "codename": "delete_disclosure"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view disclosure",
+        "content_type": 4,
+        "codename": "view_disclosure"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add genre",
+        "content_type": 5,
+        "codename": "add_genre"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change genre",
+        "content_type": 5,
+        "codename": "change_genre"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete genre",
+        "content_type": 5,
+        "codename": "delete_genre"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view genre",
+        "content_type": 5,
+        "codename": "view_genre"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add movie",
+        "content_type": 6,
+        "codename": "add_movie"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change movie",
+        "content_type": 6,
+        "codename": "change_movie"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete movie",
+        "content_type": 6,
+        "codename": "delete_movie"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view movie",
+        "content_type": 6,
+        "codename": "view_movie"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add watch list",
+        "content_type": 7,
+        "codename": "add_watchlist"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change watch list",
+        "content_type": 7,
+        "codename": "change_watchlist"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete watch list",
+        "content_type": 7,
+        "codename": "delete_watchlist"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view watch list",
+        "content_type": 7,
+        "codename": "view_watchlist"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add Token",
+        "content_type": 8,
+        "codename": "add_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change Token",
+        "content_type": 8,
+        "codename": "change_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete Token",
+        "content_type": 8,
+        "codename": "delete_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view Token",
+        "content_type": 8,
+        "codename": "view_token"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add token",
+        "content_type": 9,
+        "codename": "add_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change token",
+        "content_type": 9,
+        "codename": "change_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete token",
+        "content_type": 9,
+        "codename": "delete_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view token",
+        "content_type": 9,
+        "codename": "view_tokenproxy"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add site",
+        "content_type": 10,
+        "codename": "add_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change site",
+        "content_type": 10,
+        "codename": "change_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete site",
+        "content_type": 10,
+        "codename": "delete_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view site",
+        "content_type": 10,
+        "codename": "view_site"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add email address",
+        "content_type": 11,
+        "codename": "add_emailaddress"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change email address",
+        "content_type": 11,
+        "codename": "change_emailaddress"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete email address",
+        "content_type": 11,
+        "codename": "delete_emailaddress"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view email address",
+        "content_type": 11,
+        "codename": "view_emailaddress"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can add email confirmation",
+        "content_type": 12,
+        "codename": "add_emailconfirmation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can change email confirmation",
+        "content_type": 12,
+        "codename": "change_emailconfirmation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can delete email confirmation",
+        "content_type": 12,
+        "codename": "delete_emailconfirmation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can view email confirmation",
+        "content_type": 12,
+        "codename": "view_emailconfirmation"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+        "name": "Can add social account",
+        "content_type": 13,
+        "codename": "add_socialaccount"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+        "name": "Can change social account",
+        "content_type": 13,
+        "codename": "change_socialaccount"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+        "name": "Can delete social account",
+        "content_type": 13,
+        "codename": "delete_socialaccount"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+        "name": "Can view social account",
+        "content_type": 13,
+        "codename": "view_socialaccount"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+        "name": "Can add social application",
+        "content_type": 14,
+        "codename": "add_socialapp"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+        "name": "Can change social application",
+        "content_type": 14,
+        "codename": "change_socialapp"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+        "name": "Can delete social application",
+        "content_type": 14,
+        "codename": "delete_socialapp"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+        "name": "Can view social application",
+        "content_type": 14,
+        "codename": "view_socialapp"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+        "name": "Can add social application token",
+        "content_type": 15,
+        "codename": "add_socialtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+        "name": "Can change social application token",
+        "content_type": 15,
+        "codename": "change_socialtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+        "name": "Can delete social application token",
+        "content_type": 15,
+        "codename": "delete_socialtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+        "name": "Can view social application token",
+        "content_type": 15,
+        "codename": "view_socialtoken"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 61,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 16,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 62,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 16,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 63,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 16,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 64,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 16,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 65,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 17,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 66,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 17,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 67,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 17,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 68,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 17,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 69,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 18,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 70,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 18,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 71,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 18,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 72,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 18,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 73,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 19,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 74,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 19,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 75,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 19,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 76,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 19,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 77,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 20,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 78,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 20,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 79,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 20,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 80,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 20,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "accounts",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "articles",
+        "model": "article"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "articles",
+        "model": "comment"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "movies",
+        "model": "disclosure"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "movies",
+        "model": "genre"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "movies",
+        "model": "movie"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "movies",
+        "model": "watchlist"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "authtoken",
+        "model": "token"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "authtoken",
+        "model": "tokenproxy"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "sites",
+        "model": "site"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "account",
+        "model": "emailaddress"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "account",
+        "model": "emailconfirmation"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+        "app_label": "socialaccount",
+        "model": "socialaccount"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+        "app_label": "socialaccount",
+        "model": "socialapp"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+        "app_label": "socialaccount",
+        "model": "socialtoken"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 16,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 17,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 18,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 19,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 20,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "601d6f6vje194l9toiy53wk5nl0fsqup",
+    "fields": {
+        "session_data": ".eJxljEEOwiAURO_CuiGFQmm6dO8ZyAf-tyhC0hY3xrvbmsbEuJx5b-bJwPtS82ofOEeKGCzeISY25ppS86V1wZmNTLCGWajr9ClsDP-dA3_DvINwhXwp3Je8ztHxXeEHXfi5BEynw_05mGCZtjUE3cnOG0UA0Bt0iKo1WoS2o1YJQucGJz2JLfdGaoUK3DBoSaR60pq93pD4SeY:1q2DBg:hWcvn5ZYIvEeMXI-IDkaByHC7IvJIpH4-DuFv_4RSH8",
+        "expire_date": "2023-06-08T15:47:36.315Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "dhhxayv8ni2sff6xfbupbnj3h58m25og",
+    "fields": {
+        "session_data": ".eJxljMsOwiAQRf-FdUMoDAVcuvcbCB2mFkVI-nBj_HetaUyM23POvQ8WEOtaFn-nKQ2JoqdbSJkdyppz87XrTBM7MMka5sO6jB_gU_xnfcArlU3ESyjnyrGWZUo93xK-25mfaqR83NufgzHM43tNLUUU5DpDKko0EUQngxUCOgLbOxjASgBDRgCgVQ6VRiVb12ot9BDZ8wVqp0h8:1q2DHu:NEY5Qg7fQ0LAv7SltUcCoXustqpXTexKUTl03HDtIIs",
+        "expire_date": "2023-06-08T15:54:02.096Z"
+    }
+}
+]
