@@ -1,5 +1,5 @@
 <template>
-  <div class="card mx-3 mb-5" style="">
+  <div class="card mx-3 mb-5" @click="godetail">
     <img v-if="MainMovie" :src="pURL + MainMovie.backdrop_path" class="card-img" style="opacity: 0.2; max-height:650px;">
     <div class="card-img-overlay d-flex align-items-center card-overlay">
       <div class="d-flex mx-5 me-5 overlay-content">
@@ -47,6 +47,13 @@ export default {
         console.log(err)
       })
     },
+    godetail(){
+      console.log(12313)
+        if(this.$route.params.movie_id != this.movie_id){
+          this.$router.push({name:'detail',params:{movie_id:this.movie_id}})
+        }
+
+    }
   },
   computed: {  
     MainMovie() {

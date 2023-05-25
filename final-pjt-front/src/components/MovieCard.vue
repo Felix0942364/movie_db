@@ -1,32 +1,42 @@
 <template>
-  <div class="col my-3 mx-3 shadow wrapper">
+  <div class="col my-3 mx-3 shadow wrapper" @click="godetail">
     <div class="card front-face ">
         <img :src='pURL+movie.poster_path' class="card-img-top h-100"> 
     </div>
     <div class="card h-100 back-face">
       <h4 class="card-title" style="font-weight: bold;">{{ movie.title }}</h4>
-      <h5 class="card-subtitle">{{ movie.tagline }}</h5>
+      <h5 class="card-subtitle">{{ movie?.tagline }}</h5>
       <p class="card-text">{{ movie.overview }}</p>
     </div>
   </div>
 </template>
 
 <script>
+// import MovieDetailView from '@/views/MovieDetailView.vue';
 export default {
   name: 'MovieListItem',
   props: {
     movie: Object,
   },
+  components:{
+    // MovieDetailView
+  },
   data(){
     return{pURL:'https://image.tmdb.org/t/p/original/'}
   },
+  methods:{
+    godetail(){
+        if(this.$route.params.movie_id != this.movie.id){
+          this.$router.push({name:'detail',params:{movie_id:this.movie.id}})
+        }
+
+    }
+  }
 }
 </script>
 
 <style scoped>
-/* .card{
-    min-width: 200px;
-} */
+
 .card-text {
   overflow: hidden;
   text-overflow: ellipsis;
