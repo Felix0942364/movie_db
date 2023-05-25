@@ -1,6 +1,8 @@
 <template>
   <div class="articlelist">
     <h1>This is articlelist page</h1>
+    <router-link :to="{name:'createArticle'}">[새로운 글]</router-link> 
+    <router-view/>
     <ArticleListItem
     v-for="article in this.articles"
     :key="article.pk"

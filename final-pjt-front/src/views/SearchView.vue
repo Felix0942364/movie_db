@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="search mt-5">
     <form @submit.prevent="search">
       <input type="searchInput" id="searchInput" v-model="searchInput">
       <input type="submit" value="search">
