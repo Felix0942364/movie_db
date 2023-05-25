@@ -1,15 +1,15 @@
 <template>
   <div class="community">
-    <router-link to="/watchlist/articlelist">ArtilcleList</router-link>|
-    <router-link :to="{name:'createArticle'}">[CREATE]</router-link> 
-    <router-view/>
+    <ArticleListView/>
   </div>
 </template>
 
 <script>
+import ArticleListView from './ArticleListView.vue';
 export default {
   name: 'CommunityView',
   components: {
+    ArticleListView
   }
 }
 </script>

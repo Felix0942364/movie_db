@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>게시글 작성</h1>
+    <h1>게시글 수정</h1>
     <!-- <button @click="loadTextarea">불러오기</button> -->
     <br>
     <div class="d-flex justify-content-around">
       <input type="text" id="title" v-model.trim="title" placeholder="제목을 입력하세요.">
-      <button @click="createArticle">저장!</button>
+      <button @click="EditArticle">저장!</button>
     </div>
     <div id="container">
       <div id="editor"></div>
@@ -24,10 +24,25 @@ export default {
   data() {
     return {
       title: null,
+      content: null
     }
   },
   methods: {
-    createArticle() {
+    loadTextarea() {
+      axios({
+        method: 'get',
+        url: API_URL + "/api/articles/" + this.$route.params.articleID,
+        headers: {
+          Authorization : `Token ${this.$store.state.token}`
+        }
+      })
+      .then((res) => {
+        ckdata.setData(res.data.content)
+        this.title = res.data.title 
+      })
+      .catch(err => console.log(err))
+    },
+    EditArticle() {
       const title = this.title
       const content = ckdata.getData()
 
@@ -39,16 +54,15 @@ export default {
         return
       }
       axios({
-        method: 'post',
-        url: `${API_URL}/api/articles/`,
+        method: 'put',
+        url: `${API_URL}/api/articles/${this.$route.params.articleID}/`,
         data: { title, content },
         headers: {
           Authorization : `Token ${this.$store.state.token}`
         }
       })
       .then(() => {
-        // console.log(res)
-        this.$router.push({name: 'articlelist'})
+        this.$router.push({name:'articleDetail', params: {articleID : this.$route.params.articleID}})
       })
       .catch((err) => {
         console.log(err)
@@ -219,13 +233,10 @@ export default {
       this.content = ckdata.getData()
       console.log('save: ',this.content)
     },
-    loadTextarea(){
-      if(this.content){ckdata.setData(this.content)}
-    }
   },
   mounted(){
     this.getCKEDITOR()
-
+    this.loadTextarea()
   }
 }
 </script>
