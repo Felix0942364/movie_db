@@ -372,6 +372,7 @@ export default {
   object-fit: cover;
   object-position: center;
   background-color: white;
+  box-shadow: 0 5px 20px #eeeeee8c;
 }
 
 

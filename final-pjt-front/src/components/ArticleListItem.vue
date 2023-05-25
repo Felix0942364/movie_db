@@ -1,8 +1,12 @@
 <template>
-  <div class="hello">
-    {{ article }}
-    <button @click="toDetail">{{ article.title }}</button>
-  </div>
+  <tr @click="toDetail">
+    <th scope="row">{{article.id}}</th>
+    <td> {{ article.title }} </td>
+    <td> {{ article.title }} </td>
+    <td> {{ article.title }} </td> 
+    <td> {{ article.title }} </td>
+    <!-- <button @click="toDetail">{{ article.title }}</button> -->
+  </tr>
 </template>
 
 <script>
@@ -18,3 +22,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+tr {
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.164);
+}
+
+</style>

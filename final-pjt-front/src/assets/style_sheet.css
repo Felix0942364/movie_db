@@ -71,6 +71,7 @@ nav a.router-link-exact-active {
 
 body {
   background-image: url('@/assets/img/temp_bg_img.jpg');
+  background-size:cover;
   line-height: 1.6;
   margin: 0;
 }

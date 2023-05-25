@@ -10,6 +10,7 @@
                 <h2 class="fw-bold mb-4 text-uppercase">SIGN UP</h2>
                 <!-- <p class="text-white-50 mb-3">Please enter your username and password</p> -->
                 <form @submit.prevent="signUp">
+                  <p class="text-white-50 mb-3">Please enter username and confirm password</p>
                   <div class="form-floating mt-4 mb-4">
                     <input type="text" class="form-control" id="username" placeholder="Username" v-model="username">
                     <label class="text-secondary" for="username" >Username</label>

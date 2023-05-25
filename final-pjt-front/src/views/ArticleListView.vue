@@ -1,12 +1,31 @@
 <template>
   <div class="articlelist">
-    <h1>This is articlelist page</h1>
-    <router-link :to="{name:'createArticle'}">[새로운 글]</router-link> 
-    <router-view/>
-    <ArticleListItem
-    v-for="article in this.articles"
-    :key="article.pk"
-    :article="article"/>
+    <div class="container mt-3 p-3">
+      <div class="d-flex justify-content-between px-3 pt-2">
+        <h1>게시판</h1>
+        <button class="btn btn-secondary" @click="$router.push({name:'createArticle'})">새글 작성</button> 
+      </div>
+      <hr>
+      <div class="px-3">
+        <table class="table text-white mt-3">
+          <thead>
+            <tr>
+              <th scope="col">게시글 번호</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성자</th>
+              <th scope="col">좋아요</th>
+              <th scope="col">작성일자</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ArticleListItem
+            v-for="article in this.articles"
+            :key="article.pk"
+            :article="article"/>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,3 +68,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container {
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
+
+</style>
