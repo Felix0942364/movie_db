@@ -5,7 +5,6 @@ import store from '@/store/index.js'
 import HomeView from '@/views/HomeView.vue'
 import SearchView from '@/views/SearchView.vue'
 import CommunityView from '@/views/CommunityView.vue'
-import WatchlistView from '@/views/WatchlistView.vue'
 
 import ProfileView from '@/views/ProfileView.vue'
 import SingupView from '@/views/SignupView.vue'
@@ -46,11 +45,6 @@ const routes = [
     path: '/community/create',
     name: 'createArticle',
     component: ArticleCreateView
-  },
-  {
-    path: '/watchlists',
-    name: 'watchlists',
-    component: WatchlistView
   },
   {
     path: '/watchlist/articlelist',

@@ -49,7 +49,6 @@ export default new Vuex.Store({
     REMOVE_TOKEN(state) {
       state.articles = null
       state.movies = null
-      state.watchlists = null
       state.token = null
       state.id = null 
       router.push({name:'home'})

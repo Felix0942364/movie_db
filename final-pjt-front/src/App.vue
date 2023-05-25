@@ -8,7 +8,6 @@
       <div class="nav-list">
         <router-link to="/search">Search</router-link> 
         <router-link to="/community">Community</router-link> 
-        <router-link to="/watchlists">My Watchlists</router-link> 
       </div>
       <div class="nav-profile">
         <div v-if="this.$store.getters.isAuthenticated">

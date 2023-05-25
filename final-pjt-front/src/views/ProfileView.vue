@@ -1,5 +1,5 @@
 <template>
-  <div class="profile_container">
+  <div class="profile_container p-3">
 
     <div class="profile p-5">
       <img :src="imgSrc" v-if="imgSrc"/>
@@ -8,20 +8,77 @@
       <p v-if="user.profile_message"> {{user.profile_message}} </p>
       
       <div class="d-flex flex-row py-1 px-5 mb-3 justify-content-around">
-        <div class="followings d-flex flex-column">
+        <div class="followings d-flex flex-column" data-bs-toggle="modal" data-bs-target="#following">
           <span class="count">{{user.following_count}}</span>
-          <span class="label">Followings</span>
+          <span class="label">Following</span>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="following" tabindex="-1" aria-labelledby="following" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-secondary" id="following">FOLLOWING</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h1 class="text-primary">ADD FOLLOWING</h1>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
         
-        <div class="followers d-flex flex-column">
+
+        <div class="followers d-flex flex-column" data-bs-toggle="modal" data-bs-target="#followers">
           <span class="count">{{user.followers_count}}</span>
           <span class="label">Followers</span>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="followers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">재생목록 생성</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h1 class="text-primary">ADD FOLLOWERS</h1>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <button class="bottom-button btn-grad" v-if="user.id === this.$store.state.id">프로필 수정</button>
+
+
+      <button class="bottom-button btn-grad" v-if="user.id === this.$store.state.id" data-bs-toggle="modal" data-bs-target="#edit-profile">프로필 수정</button>
       <button class="bottom-button btn-grad" v-else>팔로우</button>
-      
+
+        <!-- Modal -->
+      <div class="modal fade" id="edit-profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">재생목록 생성</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h1 class="text-primary">프로필 수정</h1>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <div v-if="user.preferences.length != 0">
         <h1> 취향 </h1>
         <UserPreference
@@ -33,10 +90,10 @@
     </div>
 
     <div class="board">
-      <div class="watchlist d-flex flex-column align-items-start">
+      <div class="watchlist d-flex flex-column align-items-start container-fluid p-0">
         <h2>{{ user.username }} 님의 재생목록</h2>
         <div class="d-flex">
-          <WatchLists :watchlists="user.watchlists"/>
+          <WatchLists :watchlists="user.watchlists" @added-watchlist="getProfile"/>
         </div>
       </div>
       <br>
@@ -163,21 +220,14 @@ export default {
     }
   },
   computed: {
-    myWatchList() {
-      return this.$store.state.watchlists
-    },
     myProfile() {
       return this.getProfile()
     }
   },
   created() {
     this.getProfile()
-    this.getMyWatchList()
   },
   methods : {
-    getMyWatchList() {
-      this.$store.dispatch('getMyWatchList')
-    },
     getProfile() {
       axios({
         method:'get',
@@ -190,6 +240,9 @@ export default {
           this.user = res.data 
         })
         .catch(err => console.log(err))
+    },
+    test() {
+      console.log('in profile page')
     },
     addWatchList() {
       if (!this.newWatchlistTitle) alert('내용을 입력해주세요.')
@@ -245,7 +298,7 @@ export default {
 .profile_container {
   display: flex;
   justify-content: center;
-  background-image: url('@/assets/img/temp_bg_img.jpg');
+  /* background-image: url('@/assets/img/temp_bg_img.jpg'); */
   object-fit: center;
   object-position: center;
   
@@ -310,7 +363,7 @@ export default {
   transition: 0.5s;
   background-size: 200% auto;
   color: white;            
-  box-shadow: 0 5px 10px #eee;
+  box-shadow: 0 5px 10px #eeeeee8c;
   border-radius: 10px;
   border: none;
   display: block;
