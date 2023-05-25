@@ -11,6 +11,7 @@ from .serializers import ProfileSerializer, FollowingSerializer, UserSerializer
 
 
 @api_view(['GET', 'POST', 'PUT'])
+@permission_classes([IsAuthenticated])
 def profile(request, user_pk):
     if request.method == 'GET':
         user = get_object_or_404(get_user_model(), pk = user_pk)
@@ -20,6 +21,7 @@ def profile(request, user_pk):
     elif request.method == 'POST':
         if (request.user.pk != user_pk):
             return Response({"could edit no other than your profile"})
+        print(request.data)
         user = get_object_or_404(get_user_model(), pk = request.user.pk)
         serializer = UserSerializer(instance=user, data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -40,7 +42,7 @@ def profile(request, user_pk):
 @permission_classes([IsAuthenticated])
 def follow(request, user_pk):
     if (request.user.pk == user_pk):
-        return Response()
+        return Response({'error':"can't follow yourself"})
     user = get_object_or_404(get_user_model(), pk=user_pk)
     if user.followers.filter(pk=request.user.pk).exists():
         user.followers.remove(request.user)

@@ -18,14 +18,15 @@ class UserSimplifiedSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'profile_img')
 
 class ArticleSimplifiedSerializer(serializers.ModelSerializer):
+    author_name = serializers.CharField(source='author.username', read_only=True)
     class Meta:
         model = Article
-        fields = ('author', 'id', 'title')
+        fields = ('author', 'id', 'title', 'author_name', 'created_at')
 
 class CommentSimplifiedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ('id', 'article', 'content')
+        fields = ('id', 'article', 'content', 'created_at')
 
 class ProfileSerializer(serializers.ModelSerializer):
     followers = UserSimplifiedSerializer(many=True, read_only=True)

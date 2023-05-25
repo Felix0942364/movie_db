@@ -16,7 +16,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-image: linear-gradient(to bottom, rgb(252, 116, 24, 1), rgba(252, 116, 24, 0.6))
+  background-image: linear-gradient(to bottom, rgb(252, 116, 24, 1), rgba(252, 115, 24, 0.507))
 }
 
 nav a {
@@ -28,13 +28,13 @@ nav a {
 
 .nav-list a:hover,.nav-profile a:hover, #homelink:hover
 {  
-  background-color: #1b1f23;
+  background-color: #1312128e;
   border-radius: 3px;
 }
 
 
 nav a.router-link-exact-active {
-  color: blue;
+  color: rgb(0, 0, 0);
 }
 
 .nav-logo{

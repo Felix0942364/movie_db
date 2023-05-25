@@ -1,8 +1,8 @@
 <template>
-  <div class="profile_container p-3">
+  <div class="profile_container p-5">
 
     <div class="profile p-5">
-      <img :src="user.profile_img" v-if="user.profile_img"/>
+      <img :src="'http://localhost:8000' + user.profile_img" v-if="user.profile_img"/>
       <img src="@/assets/img/base_profile.png" v-else/>
       <h1 class="pt-3 pb-0"> {{ user.username }} </h1>
       <p>{{user.profile_message}} </p>
@@ -21,11 +21,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body text-secondary">
-                <div class="followings"
-                v-for="following in user.following"
-                :key="following.id"
-                >
-                </div>
+                <FollowItem
+                :follows="user.following"
+                />
               </div>
             </div>
           </div>
@@ -42,11 +40,13 @@
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">재생목록 생성</h1>
+                <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">FOLLOWERS</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <h1 class="text-primary">ADD FOLLOWERS</h1>
+                <FollowItem
+                :follows="user.followers"
+                />
               </div>
             </div>
           </div>
@@ -54,7 +54,8 @@
       </div>
 
 
-      <button class="bottom-button btn-grad" v-if="user.id === this.$store.state.id" data-bs-toggle="modal" data-bs-target="#edit-profile">프로필 수정</button>
+      <button class="bottom-button btn-grad" v-if="owner" data-bs-toggle="modal" data-bs-target="#edit-profile">프로필 수정</button>
+      <button class="bottom-button btn-grad" v-else-if="followed">언팔로우</button>
       <button class="bottom-button btn-grad" v-else>팔로우</button>
 
         <!-- Modal -->
@@ -67,7 +68,7 @@
             </div>
             <div class="modal-body">
               <div>
-                <input class="w-100" id='customFile' value="파일 선택" style="color:black" type="file" ref="fileInput" @change="handleFileChange">
+                <input type="file" class="w-100" value="파일 선택" style="color:black" ref="fileInput" @change="handleFileChange">
               </div>
               <!-- <p class="text-secondary" v-if="loadedProfileImg" > {{ loadedProfileImg.name }} </p> -->
               <div class="form-floating my-3">
@@ -83,23 +84,16 @@
           </div>
         </div>
       </div>
-
-
-      <!-- <div v-if="user.preferences.length != 0">
-        <h1> 취향 </h1>
-        <UserPreference
-        v-for="preference in user.preferences"
-        :key="preference.id"
-        :preference="preference"
-        />
-      </div> -->
     </div>
 
     <div class="board">
       <div class="watchlist d-flex flex-column align-items-start container-fluid p-0">
         <h2>{{ user.username }} 님의 재생목록</h2>
         <div class="d-flex">
-          <WatchLists :watchlists="user.watchlists" @added-watchlist="getProfile"/>
+          <WatchLists
+          :watchlists="user.watchlists"
+          :owner="owner"
+          @added-watchlist="getProfile"/>
         </div>
       </div>
       <br>
@@ -114,9 +108,6 @@
           </li>
           <li class="nav-item" @click="selectedTab=3">
             <p class="nav-link" :class="{active:selectedTab===3}">작성한 댓글</p>
-          </li>
-          <li class="nav-item" @click="selectedTab=4">
-            <p class="nav-link" :class="{active:selectedTab===4}">좋아한 댓글</p>
           </li>
         </ul>
       </div>
@@ -177,24 +168,6 @@
           </tbody>
         </table>
       </div>
-      <div class="container" v-if="selectedTab === 4">
-        <table class="table text-white mt-3">
-          <thead>
-            <tr>
-              <th scope="col">게시글</th>
-              <th scope="col">댓글</th>
-              <th scope="col">좋아한 일자</th>
-            </tr>
-          </thead>
-          <tbody>
-            <CommentTableItem
-              v-for="comment in user.liked_comments"
-              :key="comment.id"
-              :item="comment"
-            />
-          </tbody>
-        </table>
-      </div>
       <h1> {{ user }}</h1>
       <footer></footer>
     </div>
@@ -206,6 +179,7 @@
 import WatchLists from '@/components/WatchLists.vue'
 import TableItem from '@/components/TableItem.vue'
 import CommentTableItem from '@/components/CommentTableItem.vue'
+import FollowItem from '@/components/FollowItem.vue'
 
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
@@ -213,7 +187,7 @@ const API_URL = 'http://127.0.0.1:8000'
 export default {
   name: 'ProfileView',
   components: {
-    // UserPreference,
+    FollowItem,
     WatchLists,
     TableItem,
     CommentTableItem,
@@ -225,6 +199,9 @@ export default {
       user:null,
       selectedTab:1,
 
+      owner:false,
+      followed:false,
+
       loadedProfileImg:File,
       editProfileMsg: "",
     }
@@ -232,7 +209,7 @@ export default {
   computed: {
     myProfile() {
       return this.getProfile()
-    }
+    },
   },
   created() {
     this.getProfile()
@@ -241,7 +218,7 @@ export default {
     getProfile() {
       axios({
         method:'get',
-        url: `${API_URL}/accounts/profile/${this.$store.state.id}/`,
+        url: `${API_URL}/accounts/profile/${this.$route.params.userID}/`,
         headers: {
           Authorization : `Token ${this.$store.state.token}`
         }
@@ -249,6 +226,8 @@ export default {
         .then((res) => {
           this.user = res.data 
           this.editProfileMsg = res.data.profile_message
+          this.owner = (this.user.id === this.$route.params.userID)? true: false
+          this.followed = (this.user.followers.some((obj) => (obj.id === this.$store.state.id)))
         })
         .catch(err => console.log(err))
     },
@@ -276,23 +255,30 @@ export default {
         .catch(err => console.log(err))
       // this.newWatchlist = ""
     },
+
     handleFileChange(event) {
+      console.log(event.target.files)
       this.loadedProfileImg = event.target.files[0]
       console.log(this.loadedProfileImg)
     },
+
     editProfile(){
-      const formData = new FormData();
-      formData.append('file', this.selectedFile)
+      let formData = new FormData();
+
+      formData.append('profile_img', this.loadedProfileImg)
+      formData.append('profile_message', this.editProfileMsg)
       console.log(formData, this.editProfileMsg)
+
       axios({
-        method: 'put',
+        method: 'post',
         url:`http://127.0.0.1:8000/accounts/profile/${this.$store.state.id}/`,
-        data: {'profile_message': this.editProfileMsg},
-        formData,
+        data: formData,
         headers: {
-          Authorization : `Token ${this.$store.state.token}`
+          'Content-Type': 'multipart/form-data', 
+          'Authorization': `token ${this.$store.state.token}`
         }
       })
+      // axios.post(`http://127.0.0.1:8000/accounts/profile/${this.$store.state.id}/`, formData, config)
         .then(res => {
           console.log(res.data)
           this.getProfile()
@@ -421,25 +407,13 @@ export default {
 }
 
 table {
-  color:white;
-
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
 }
 
 th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ff7637;
+  padding: 10px;
 }
-
-/* th {
-  background-color: #f2f2f2;
-} */
-
-tr:nth-child(even) {
-  background-color: rgba(249, 249, 249, 0.1);
-}
-
 
 </style>

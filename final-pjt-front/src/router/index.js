@@ -58,7 +58,7 @@ const routes = [
     component: ArticleListView
   },
   {
-    path: '/profile',
+    path: '/profile/:userID',
     name: 'profile',
     component: ProfileView
   },

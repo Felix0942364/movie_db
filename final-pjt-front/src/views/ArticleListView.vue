@@ -1,11 +1,11 @@
 <template>
   <div class="articlelist">
     <div class="container mt-3 p-3">
-      <div class="d-flex justify-content-between px-3 pt-2">
+      <div class="d-flex justify-content-between align-items-center px-3 pt-2">
         <h1>게시판</h1>
         <button class="btn btn-secondary" @click="$router.push({name:'createArticle'})">새글 작성</button> 
       </div>
-      <hr>
+      <!-- <hr> -->
       <div class="px-3">
         <table class="table text-white mt-3">
           <thead>
@@ -72,8 +72,15 @@ export default {
 <style scoped>
 .container {
   border-radius: 1rem;
-  background-color: rgba(255, 255, 255, 0.075);
+  background-color: rgba(255, 255, 255, 0.158);
 }
 
-
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border-bottom: 1px solid #ff7637;
+  padding: 10px;
+}
 </style>

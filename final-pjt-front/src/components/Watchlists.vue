@@ -1,6 +1,6 @@
 <template>
   <div class="watchlist-container">
-    <div class="watchlist">
+    <div class="watchlist" v-if="owner">
       <img src="@/assets/img/add_watchlist.png" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
       <p> 새로운 재생목록 추가</p>
     </div>
@@ -56,7 +56,8 @@ export default {
     }
   },
   props: {
-    watchlists: Array
+    watchlists: Array,
+    owner:Boolean,
   },
   components: {
     WatchlistItems
