@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import router from './router'
-
+import InfiniteLoading from 'vue-infinite-loading'
 Vue.config.productionTip = false
 
 new Vue({
@@ -10,3 +10,5 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+Vue.use(InfiniteLoading, { /* options */ });
