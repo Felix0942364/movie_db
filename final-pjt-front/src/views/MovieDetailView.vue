@@ -1,6 +1,6 @@
 <template>
-  <div class="MovieDetail card my-4 d-block mx-auto" style="width: 800px;">
-    <img v-if="movie" :src="pURL + movie.backdrop_path" class="card-img h-100vh"  style="height: 1200px; opacity: 0.45;">
+  <div class="MovieDetail card my-4 d-block mx-auto" style="width: 800px; ">
+    <img v-if="movie" :src="pURL + movie.backdrop_path" class="card-img "  style="height: 1500px; opacity: 0.25; object-fit: cover;">
     <div class="MovieDetail-content card-img-overlay" style="">
       <div class="MovieDetail-header card-title my-3">
         <h1>{{ movie?.title }}</h1>

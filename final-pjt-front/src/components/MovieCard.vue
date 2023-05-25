@@ -1,7 +1,7 @@
 <template>
-  <div class="col my-3 mx-3 shadow wrapper" @click="godetail">
+  <div class="col my-3 mx-3 p-0 shadow wrapper" @click="godetail">
     <div class="card front-face ">
-        <img :src='pURL+movie.poster_path' class="card-img-top h-100"> 
+        <img :src='pURL+movie.poster_path' class="card-img-top"> 
     </div>
     <div class="card h-100 back-face">
       <h4 class="card-title" style="font-weight: bold;">{{ movie.title }}</h4>
@@ -50,8 +50,7 @@ export default {
   color: #e2742a;
 }
 .wrapper{
-  height: 150px;
-  width: 100px;
+  height: 300px;
   position: relative;
   transform-style: preserve-3d;
   perspective: 1000px;
@@ -60,12 +59,11 @@ export default {
   position: absolute;
   height: 100%;
   width: 100%;
-  padding: 5px;
-  background: #f8d2b1;
   border-radius: 5%;
   transform: translateY(0deg);
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  background: black;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
   transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
 }
@@ -76,7 +74,7 @@ export default {
 .wrapper .card img{
   height: 100%;
   width: 100%;
-  /* object-fit: cover; */
+  object-fit: cover;
   border-radius: 10px;
 }
 .wrapper .back-face{
@@ -84,6 +82,8 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
+  background: #f8d2b1;
+
   transform: rotateY(180deg);
 }
 .wrapper:hover > .back-face{
@@ -93,14 +93,13 @@ export default {
 .wrapper .back-face img{
   height: 150px;
   width: 150px;
-  padding: 5px;
   border-radius: 50%;
   background: linear-gradient(375deg, #1cc7d0, #2ede98);
 }
 .wrapper .back-face .info{
   text-align: center;
 }
-.back-face .info .title{
+.back-face{
   font-size: 30px;
   font-weight: 500;
 }
