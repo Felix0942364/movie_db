@@ -1,5 +1,5 @@
 <template>
-  <div class="container mb-5">
+  <div class="container mb-5 slide">
     <h3 class="d-flex justify-content-start">{{ title }}</h3>
     <div class="movie-list row gy-3"
       :style="{ transform: `translateX(${slideOffset}px)` }"
@@ -49,10 +49,4 @@ export default {
   overflow: hidden;
 }
 
-.slide {
-  flex: 0 0 auto;
-  width: 100%;
-  max-width: 20%;
-  box-sizing: border-box;
-}
 </style>
