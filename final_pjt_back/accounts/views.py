@@ -7,10 +7,10 @@ from rest_framework.permissions import IsAuthenticated
 
 
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .serializers import ProfileSerializer, FollowingSerializer
+from .serializers import ProfileSerializer, FollowingSerializer, UserSerializer
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'PUT'])
 def profile(request, user_pk):
     if request.method == 'GET':
         user = get_object_or_404(get_user_model(), pk = user_pk)
@@ -20,7 +20,21 @@ def profile(request, user_pk):
     elif request.method == 'POST':
         if (request.user.pk != user_pk):
             return Response({"could edit no other than your profile"})
-        user = get_object_or_404(get_user_model(), pk = request.user)
+        user = get_object_or_404(get_user_model(), pk = request.user.pk)
+        serializer = UserSerializer(instance=user, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        if (request.user.pk != user_pk):
+            return Response({"could edit no other than your profile"})
+        user = get_object_or_404(get_user_model(), pk = request.user.pk)
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+        
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

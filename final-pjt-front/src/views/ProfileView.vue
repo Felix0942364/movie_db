@@ -2,10 +2,10 @@
   <div class="profile_container p-3">
 
     <div class="profile p-5">
-      <img :src="imgSrc" v-if="imgSrc"/>
+      <img :src="user.profile_img" v-if="user.profile_img"/>
       <img src="@/assets/img/base_profile.png" v-else/>
       <h1 class="pt-3 pb-0"> {{ user.username }} </h1>
-      <p v-if="user.profile_message"> {{user.profile_message}} </p>
+      <p>{{user.profile_message}} </p>
       
       <div class="d-flex flex-row py-1 px-5 mb-3 justify-content-around">
         <div class="followings d-flex flex-column" data-bs-toggle="modal" data-bs-target="#following">
@@ -13,7 +13,6 @@
           <span class="label">Following</span>
         </div>
 
-        <!-- Modal -->
         <div class="modal fade" id="following" tabindex="-1" aria-labelledby="following" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -21,11 +20,12 @@
                 <h1 class="modal-title fs-5 text-secondary" id="following">FOLLOWING</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body">
-                <h1 class="text-primary">ADD FOLLOWING</h1>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <div class="modal-body text-secondary">
+                <div class="followings"
+                v-for="following in user.following"
+                :key="following.id"
+                >
+                </div>
               </div>
             </div>
           </div>
@@ -48,9 +48,6 @@
               <div class="modal-body">
                 <h1 class="text-primary">ADD FOLLOWERS</h1>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
             </div>
           </div>
         </div>
@@ -65,28 +62,37 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">재생목록 생성</h1>
+              <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">{{user.username}}님의 프로필</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <h1 class="text-primary">프로필 수정</h1>
+              <div>
+                <input class="w-100" id='customFile' value="파일 선택" style="color:black" type="file" ref="fileInput" @change="handleFileChange">
+              </div>
+              <!-- <p class="text-secondary" v-if="loadedProfileImg" > {{ loadedProfileImg.name }} </p> -->
+              <div class="form-floating my-3">
+                <input type="text" class="form-control" id="profile-msg" placeholder="재생목록 제목" v-model="editProfileMsg">
+                <label class="text-secondary" for="profile-msg">상태 메시지</label>
+              </div>
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="editProfile">수정하기</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
             </div>
           </div>
         </div>
       </div>
 
 
-      <div v-if="user.preferences.length != 0">
+      <!-- <div v-if="user.preferences.length != 0">
         <h1> 취향 </h1>
         <UserPreference
         v-for="preference in user.preferences"
         :key="preference.id"
         :preference="preference"
         />
-      </div>
+      </div> -->
     </div>
 
     <div class="board">
@@ -189,13 +195,14 @@
           </tbody>
         </table>
       </div>
+      <h1> {{ user }}</h1>
       <footer></footer>
     </div>
   </div>
 </template>
 
 <script>
-import UserPreference from '@/components/UserPreference.vue'
+// import UserPreference from '@/components/UserPreference.vue'
 import WatchLists from '@/components/WatchLists.vue'
 import TableItem from '@/components/TableItem.vue'
 import CommentTableItem from '@/components/CommentTableItem.vue'
@@ -206,7 +213,7 @@ const API_URL = 'http://127.0.0.1:8000'
 export default {
   name: 'ProfileView',
   components: {
-    UserPreference,
+    // UserPreference,
     WatchLists,
     TableItem,
     CommentTableItem,
@@ -216,7 +223,10 @@ export default {
       newWatchlistTitle:"",
       disclosure:"",
       user:null,
-      selectedTab:1
+      selectedTab:1,
+
+      loadedProfileImg:File,
+      editProfileMsg: "",
     }
   },
   computed: {
@@ -238,6 +248,7 @@ export default {
       })
         .then((res) => {
           this.user = res.data 
+          this.editProfileMsg = res.data.profile_message
         })
         .catch(err => console.log(err))
     },
@@ -253,7 +264,7 @@ export default {
         data: {
           title: this.newWatchlistTitle,
           scope_of_disclosure: this.disclosure
-          },
+        },
         headers: {
           Authorization : `Token ${this.$store.state.token}`
         }
@@ -264,6 +275,29 @@ export default {
         })
         .catch(err => console.log(err))
       // this.newWatchlist = ""
+    },
+    handleFileChange(event) {
+      this.loadedProfileImg = event.target.files[0]
+      console.log(this.loadedProfileImg)
+    },
+    editProfile(){
+      const formData = new FormData();
+      formData.append('file', this.selectedFile)
+      console.log(formData, this.editProfileMsg)
+      axios({
+        method: 'put',
+        url:`http://127.0.0.1:8000/accounts/profile/${this.$store.state.id}/`,
+        data: {'profile_message': this.editProfileMsg},
+        formData,
+        headers: {
+          Authorization : `Token ${this.$store.state.token}`
+        }
+      })
+        .then(res => {
+          console.log(res.data)
+          this.getProfile()
+        })
+        .catch(err => console.log(err))
     }
   },
 }
@@ -281,6 +315,7 @@ export default {
   font-weight: bold;
   font-size: larger;
 }
+
 /* 
 .tab-content {
   border: 1px solid #dee2e6;
@@ -307,9 +342,9 @@ export default {
 .profile {
   width: 25%;
   min-width: 400px;
-  /* border-top-left-radius: 20px; */
-  /* border-bottom-left-radius: 20px; */
-  border-radius: 2rem;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  /* border-radius: 2rem; */
 }
 
 .board {
@@ -404,4 +439,6 @@ th, td {
 tr:nth-child(even) {
   background-color: rgba(249, 249, 249, 0.1);
 }
+
+
 </style>

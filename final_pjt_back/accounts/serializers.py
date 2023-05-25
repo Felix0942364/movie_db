@@ -3,6 +3,15 @@ from django.contrib.auth import get_user_model
 from articles.models import Article, Comment
 from movies.serializers import WatchListSerializer
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        exclude = ('password',
+                   'is_superuser',
+                   'is_active',
+                   'is_staff')
+        read_only_fields = ('username',)
+
 class UserSimplifiedSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
