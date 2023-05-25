@@ -42,15 +42,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <div class="form-floating my-3">
+                <!-- <div class="form-floating my-3">
                   <input type="text" class="form-control" id="profile-msg" placeholder="재생목록 제목" v-model="editProfileMsg">
                   <label class="text-secondary" for="profile-msg">상태 메시지</label>
+                </div> -->
+                <div v-for="watchlist in getWatchlists"
+                :key="watchlist.id"
+                >
+                  <p>{{ watchlist.title }}</p>
                 </div>
               </div>
-              <div class="modal-footer">
+
+
+
+              <!-- <div class="modal-footer">
                 <button class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="editProfile">수정하기</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -161,6 +169,9 @@ export default {
       const startIndex = this.currentSlideRecomendate;
       const endIndex = this.currentSlideRecomendate + this.maxSlides - 1;
       return this.recommendations.slice(startIndex, endIndex + 1);
+    },
+    getWatchlists() {
+      return this.$store.state.watchlists
     }
   },
   watch: {
