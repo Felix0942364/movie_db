@@ -43,8 +43,8 @@ export default {
     commentDelete(id) {
       this.$emit('comment-deleted', id)
     },
-    commentEdit (id) {
-      this.$emit('comment-edited', id)
+    commentEdit (id, text) {
+      this.$emit('comment-edited', id, text)
     },
     commentLike (id) {
       this.$emit('comment-liked', id)

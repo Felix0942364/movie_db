@@ -105,6 +105,13 @@ router.beforeEach((to, from, next) => {
   ]
   const isAuthRequired = authPages.includes(to.name)
   
+  const originalPush = VueRouter.prototype.push;
+  VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => {
+      if (err.name !== 'NavigationDuplicated') throw err;
+    });
+  };
+
   if (isAuthRequired && !auth) {
     next({name:'login'})
   } else {

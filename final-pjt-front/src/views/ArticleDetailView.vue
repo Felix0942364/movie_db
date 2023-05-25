@@ -1,6 +1,7 @@
 <template>
   <div class="article mt-3 p-3">
     <h1 class="mt-3">{{ article?.title }}</h1>
+    <h2 @click='toProfile(article.author)'> by {{article.author_name}}</h2>
     <div class="mx-3 my-2">
       <div v-html="article?.content"></div>
     </div>
@@ -21,15 +22,23 @@
       <span>{{ article?.updated_at.slice(17,19) }}초 </span>
     </p>
     <span v-show="article?.article_likes_count != 0"> {{ article?.article_likes_count }} </span>
-    <button @click="articleLike" v-if="computedLike">♥</button>
+    
+    <!-- <button @click="articleLike" v-if="computedLike">♥</button>
     <button @click="articleLike" v-else>♡</button>
     <span v-if="authorIdentification">
       <button @click="articleEdit">Edit</button>
       <button @click="articleDelete">Delete</button>
+    </span> -->
+    <img class="logos" src="@/assets/img/like.png" @click="articleLike" v-if="computedLike"/>
+    <img class="logos" src="@/assets/img/unlike.png" @click="articleLike" v-else/>
+    <span v-if="authorIdentification">
+      <img class="logos" src="@/assets/img/edit_icon.png" @click="articleEdit"/>
+      <img class="logos" src="@/assets/img/delete_icon.png" @click="articleDelete"/>
     </span>
 
-    <h2 v-if="article?.comment_count">댓글 : {{ article?.comment_count }} 개</h2>
-    <h2 v-else>댓글을 달아주세요</h2>
+    <hr>
+    <h3 v-if="article?.comment_count">댓글 : {{ article?.comment_count }} 개</h3>
+    <h3 v-else>댓글을 달아주세요</h3>
     <CommentsList
     :comments="article?.comment_set"
     @comment-created="commentCreate"
@@ -80,6 +89,10 @@ export default {
         this.article = res.data
       })
       .catch(err => console.log(err))
+    },
+
+    toProfile(id) {
+      this.$router.push({name:'profile', params: { 'userID' : id}})
     },
 
     commentCreate(comment) {
@@ -135,9 +148,19 @@ export default {
         .then(() => this.getArticle())
         .catch(err => console.log(err))
     },
-    commentEdit(id) {
-      id
-      return
+    commentEdit(id, text) {
+      axios({
+        method: 'put',
+        url: `${API_URL}/api/comments/${id}/`,
+        data: {
+          'content' : text 
+        },
+        headers: {
+          Authorization : `Token ${this.$store.state.token}`
+        }        
+      })
+        .then(() => this.getArticle())
+        .catch(err => console.log(err))
     },
     commentLike(id) {
       axios({
@@ -159,5 +182,10 @@ export default {
   max-width: 800px;
   margin: auto;
   background-color: burlywood;
+}
+.logos {
+  height:40px;
+  width: 45px;
+  /* margin-left:5px; */
 }
 </style>

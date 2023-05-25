@@ -20,7 +20,7 @@
                 <h1 class="modal-title fs-5 text-secondary" id="following">FOLLOWING</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div class="modal-body text-secondary">
+              <div class="modal-body">
                 <FollowItem
                 :follows="user.following"
                 />
@@ -55,8 +55,8 @@
 
 
       <button class="bottom-button btn-grad" v-if="owner" data-bs-toggle="modal" data-bs-target="#edit-profile">프로필 수정</button>
-      <button class="bottom-button btn-grad" v-else-if="followed">언팔로우</button>
-      <button class="bottom-button btn-grad" v-else>팔로우</button>
+      <button class="bottom-button btn-grad" @click='follow' v-else-if="followed">언팔로우</button>
+      <button class="bottom-button btn-grad" @click='follow' v-else>팔로우</button>
 
         <!-- Modal -->
       <div class="modal fade" id="edit-profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -168,7 +168,7 @@
           </tbody>
         </table>
       </div>
-      <h1> {{ user }}</h1>
+      <!-- <h1> {{ user }}</h1> -->
       <footer></footer>
     </div>
   </div>
@@ -215,6 +215,10 @@ export default {
     this.getProfile()
   },
   methods : {
+    beforeRouteUpdate(to, from, next) {
+      this.getProfile()
+      next()
+    },
     getProfile() {
       axios({
         method:'get',
@@ -226,35 +230,44 @@ export default {
         .then((res) => {
           this.user = res.data 
           this.editProfileMsg = res.data.profile_message
-          this.owner = (this.user.id === this.$route.params.userID)? true: false
+          this.owner = (this.$store.state.id === this.$route.params.userID)? true: false
           this.followed = (this.user.followers.some((obj) => (obj.id === this.$store.state.id)))
         })
         .catch(err => console.log(err))
     },
-    test() {
-      console.log('in profile page')
-    },
-    addWatchList() {
-      if (!this.newWatchlistTitle) alert('내용을 입력해주세요.')
-      else if (!this.disclosure) alert('공개 여부를 설정해 주세요.')
+    
+    follow() {
       axios({
-        method : 'post',
-        url: `${API_URL}/api/watchlists/`,
-        data: {
-          title: this.newWatchlistTitle,
-          scope_of_disclosure: this.disclosure
-        },
+        method: 'post',
+        url: `http://localhost:8000/accounts/profile/${this.$route.params.userID}/follow/`,
         headers: {
           Authorization : `Token ${this.$store.state.token}`
         }
-      }) 
-        .then((res) => {
-          console.log(res)
-          this.getMyWatchList()
-        })
+      })
+        .then(() => this.getProfile())
         .catch(err => console.log(err))
-      // this.newWatchlist = ""
     },
+    // addWatchList() {
+    //   if (!this.newWatchlistTitle) alert('내용을 입력해주세요.')
+    //   else if (!this.disclosure) alert('공개 여부를 설정해 주세요.')
+    //   axios({
+    //     method : 'post',
+    //     url: `${API_URL}/api/watchlists/`,
+    //     data: {
+    //       title: this.newWatchlistTitle,
+    //       scope_of_disclosure: this.disclosure
+    //     },
+    //     headers: {
+    //       Authorization : `Token ${this.$store.state.token}`
+    //     }
+    //   }) 
+    //     .then((res) => {
+    //       console.log(res)
+    //       this.getMyWatchList()
+    //     })
+    //     .catch(err => console.log(err))
+    //   // this.newWatchlist = ""
+    // },
 
     handleFileChange(event) {
       console.log(event.target.files)

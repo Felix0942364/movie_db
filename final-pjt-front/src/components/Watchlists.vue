@@ -1,12 +1,12 @@
 <template>
   <div class="watchlist-container">
     <div class="watchlist" v-if="owner">
-      <img src="@/assets/img/add_watchlist.png" data-bs-toggle="modal" data-bs-target="#exampleModal"/>
+      <img src="@/assets/img/add_watchlist.png" data-bs-toggle="modal" data-bs-target="#add-watch-list"/>
       <p> 새로운 재생목록 추가</p>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="add-watch-list" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -79,7 +79,6 @@ export default {
         }) 
           .then(() => {
             this.$emit('added-watchlist')
-            console.log('hi')
           })
           .catch(err => console.log(err))
       // this.newWatchlist = ""
