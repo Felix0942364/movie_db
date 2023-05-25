@@ -1,30 +1,39 @@
 <template>
-  <div class="MovieDetail">
-    <img v-if="movie" :src="pURL + movie.backdrop_path" class="card-img-overlay "  style="opacity: 0.2; height:1200px;">
-    <div class="MovieDetail-header img-overlay">
-      <h1>{{ movie?.title }}</h1>
-      <p>{{ movie?.tagline}}</p>
-    </div>
-    <div class="MovieDetail-body">
-      <div class="video-container mx-2">
-        <iframe :src="vURL" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="MovieDetail card my-4 d-block mx-auto" style="width: 800px;">
+    <img v-if="movie" :src="pURL + movie.backdrop_path" class="card-img h-100vh"  style="height: 1200px; opacity: 0.45;">
+    <div class="MovieDetail-content card-img-overlay" style="">
+      <div class="MovieDetail-header card-title my-3">
+        <h1>{{ movie?.title }}</h1>
       </div>
-        <p>{{ movie?.overview }}</p>
-        <span v-for="(genre,idx) in movie?.genres" :key="idx">{{genre.name}} </span>
-        <p>{{ movie?.release_date }}</p>
+      <div class="MovieDetail-body">
+        <h4>{{ movie?.tagline}}</h4>
+        <br>
+        <div class="video-container my-3">
+          <iframe 
+          :src="vURL" 
+          frameborder="1" 
+          autoplay="1"
+          allowfullscreen="1"
+          width="720px"
+          height="480px">
+        </iframe>
+        </div>
+        <br>
+        <h5 class="mx-5 lh-base">{{ movie?.overview }}</h5>
+      </div>
+      <br>
+      <span v-for="(genre,idx) in movie?.genres" :key="idx">{{genre.name}} </span>
+      <p>{{ movie?.release_date }}</p>
+      <p>관객 평점: {{ movie?.vote_average  }}
+      </p>
+      <div class="MovieLike">
+        <button @click="movieLike" v-if="true">♥</button>
+        <button @click="movieLike" v-else>♡</button>
+      </div>
     </div>
-    <br>
-    <p>{{ movie?.vote_average }}</p>
-    <p>{{ movie?.vote_count }}</p>
     <!-- <span v-show="movie?.movie_likes_count != 0"> {{ movie?.movie_likes_count }} </span> -->
-    <!-- <button @click="movieLike" v-if="computedLike">♥</button>
-    <button @click="movieLike" v-else>♡</button> -->
-    
-    <hr>
+    <br>
     <MovieList title="Recommendations" :movies="visibleSlidesRecomendate" @wheel="handleWheelRecomendate" />
-    <hr>
-    <!-- <p>raw {{ movie }}</p> -->
-
   </div>
 </template>
 
@@ -112,6 +121,9 @@ export default {
         }
       }
     },
+    movieLike(){
+      return
+    }
   },
   created(){
     this.getmovie()
@@ -139,21 +151,4 @@ export default {
 </script>
 
 <style scoped>
-.video-container {
-	position: relative;
-	padding-bottom: 56.25%;
-	padding-top: 30px;
-	height: 0;
-	overflow: hidden;
-}
- 
-.video-container iframe,
-.video-container object,
-.video-container embed {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
 </style>

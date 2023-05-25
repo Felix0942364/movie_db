@@ -13,6 +13,7 @@ import LoginView from '@/views/LoginView.vue'
 import ArticleListView from '@/views/ArticleListView.vue'
 import ArticleCreateView from '@/views/ArticleCreateView.vue'
 import ArticleDetailView from '@/views/ArticleDetailView.vue'
+import ArticleEditView from '@/views/ArticleEditView.vue'
 
 import MovieDetailView from '@/views/MovieDetailView.vue'
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/community/create',
     name: 'createArticle',
     component: ArticleCreateView
+  },
+  {
+    path: '/community/edit/:articleID',
+    name: 'editArticle',
+    component: ArticleEditView
   },
   {
     path: '/watchlist/articlelist',
