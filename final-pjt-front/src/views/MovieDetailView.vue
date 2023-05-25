@@ -30,6 +30,31 @@
         <button @click="movieLike" v-if="true">♥</button>
         <button @click="movieLike" v-else>♡</button>
       </div>
+
+      <div>
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#add-to-watchlist">재생목록에 추가</button>
+
+          <div class="modal fade" id="add-to-watchlist" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">{{$store.state.user.username}}님의 재생목록</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="form-floating my-3">
+                  <input type="text" class="form-control" id="profile-msg" placeholder="재생목록 제목" v-model="editProfileMsg">
+                  <label class="text-secondary" for="profile-msg">상태 메시지</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="editProfile">수정하기</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- <span v-show="movie?.movie_likes_count != 0"> {{ movie?.movie_likes_count }} </span> -->
     <br>

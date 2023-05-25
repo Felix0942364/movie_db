@@ -16,6 +16,7 @@ export default new Vuex.Store({
   ],
   state: {
     id: null,
+    user: null,
     token: null,
     watchlists: null,
     Recomendation:null,
@@ -42,8 +43,9 @@ export default new Vuex.Store({
       state.movies = null
       state.watchlists = null
     },
-    SAVE_ID(state, id) {  
-      state.id = id
+    SAVE_ID(state, data) {  
+      state.user = data
+      state.id = data.pk
       router.push({name:'home'})
     },
     REMOVE_TOKEN(state) {
@@ -156,8 +158,17 @@ export default new Vuex.Store({
             headers : { Authorization : `Token ${context.state.token}` }
           })
             .then((res2) => {
-              console.log(res2.data)
               context.commit('SAVE_ID', res2.data.pk)
+              axios({
+                method : 'get',
+                url : `${API_URL}/accounts/user/`,
+                headers : { Authorization : `Token ${context.state.token}` }
+              })
+                .then((res2) => {
+                  context.commit('SAVE_ID', res2.data)
+                  context.dispatch('getMyWatchList')
+                })
+                .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
 

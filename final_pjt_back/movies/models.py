@@ -23,7 +23,7 @@ class Movie(models.Model):
     poster_path = models.URLField(max_length=200)
     overview = models.TextField()
     release_date = models.DateField()
-    genres = models.ManyToManyField(Genre, verbose_name="movies")
+    genres = models.ManyToManyField(Genre, related_name="movies")
 
 
 class WatchList(models.Model):
@@ -31,4 +31,4 @@ class WatchList(models.Model):
     title = models.CharField(max_length=100)
     cover_image = models.ImageField(blank=True)
     scope_of_disclosure = models.ForeignKey(Disclosure, on_delete=models.CASCADE)
-    movies = models.ManyToManyField(Movie, blank=True, verbose_name='watchlist')
+    movies = models.ManyToManyField(Movie, blank=True)
