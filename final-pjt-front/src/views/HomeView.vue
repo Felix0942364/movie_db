@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="Home-head">
+    <div class="Home-head mt-4">
       <MainAdvertise  :movie_id="visibleSlidesRecomendate.length > 0 ? visibleSlidesRecomendate[0].id :238"  />
     </div>
     <div class="Home-body" v-if="Recently">
