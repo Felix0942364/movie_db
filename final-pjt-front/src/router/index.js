@@ -13,7 +13,9 @@ import LoginView from '@/views/LoginView.vue'
 
 import ArticleListView from '@/views/ArticleListView.vue'
 import ArticleCreateView from '@/views/ArticleCreateView.vue'
-import ArticleDetailView from '@/views/ArticleDetailView'
+import ArticleDetailView from '@/views/ArticleDetailView.vue'
+
+import MovieDetailView from '@/views/MovieDetailView.vue'
 
 import ErrorView from '@/views/ErrorView.vue'
 
@@ -69,6 +71,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/detail/:movie_id',
+    name: 'detail',
+    component: MovieDetailView
   },
   {
     path: '*',
