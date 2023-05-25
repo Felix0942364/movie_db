@@ -48,11 +48,9 @@ export default {
       })
     },
     godetail(){
-      console.log(12313)
-        if(this.$route.params.movie_id != this.movie_id){
-          this.$router.push({name:'detail',params:{movie_id:this.movie_id}})
-        }
-
+      if(this.$route.params.movie_id != this.movie_id){
+        this.$router.push({name:'detail',params:{movie_id:this.movie_id}})
+      }
     }
   },
   computed: {  

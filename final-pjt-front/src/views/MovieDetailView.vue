@@ -1,12 +1,19 @@
 <template>
   <div class="MovieDetail">
-    <h1>{{ movie?.title }}</h1>
-    <p>{{ movie?.tagline}}</p>
-    <iframe :src="vURL" frameborder="0"></iframe>
+    <img v-if="movie" :src="pURL + movie.backdrop_path" class="card-img-overlay "  style="opacity: 0.2; height:1200px;">
+    <div class="MovieDetail-header img-overlay">
+      <h1>{{ movie?.title }}</h1>
+      <p>{{ movie?.tagline}}</p>
+    </div>
+    <div class="MovieDetail-body">
+      <div class="video-container mx-2">
+        <iframe :src="vURL" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+        <p>{{ movie?.overview }}</p>
+        <span v-for="(genre,idx) in movie?.genres" :key="idx">{{genre.name}} </span>
+        <p>{{ movie?.release_date }}</p>
+    </div>
     <br>
-    <span v-for="(genre,idx) in movie.genres" :key="idx">{{genre.name}} </span>
-    <p>{{ movie?.overview }}</p>
-    <p>{{ movie?.release_date }}</p>
     <p>{{ movie?.vote_average }}</p>
     <p>{{ movie?.vote_count }}</p>
     <!-- <span v-show="movie?.movie_likes_count != 0"> {{ movie?.movie_likes_count }} </span> -->
@@ -16,7 +23,7 @@
     <hr>
     <MovieList title="Recommendations" :movies="visibleSlidesRecomendate" @wheel="handleWheelRecomendate" />
     <hr>
-    <p>raw {{ movie }}</p>
+    <!-- <p>raw {{ movie }}</p> -->
 
   </div>
 </template>
@@ -130,3 +137,23 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+</style>

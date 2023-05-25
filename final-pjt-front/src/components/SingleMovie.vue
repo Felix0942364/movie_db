@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-item col-2 mb-3">
+  <div class="movie-item col-2 mb-3" @click="godetail">
     <img
     :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" class="img-fluid"/>
   </div>
@@ -10,6 +10,13 @@ export default {
   name: 'SingleMovie',
   props: {
     movie:Object
+  },
+  methods:{
+    godetail(){
+      if(this.$route.params.movie_id != this.movie.id){
+        this.$router.push({name:'detail',params:{movie_id:this.movie.id}})
+      }
+    }
   }
 }
 </script>
