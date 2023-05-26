@@ -1,7 +1,7 @@
 <template>
   <div class="article mt-3 p-3">
     <h1 class="mt-3">{{ article?.title }}</h1>
-    <h2 @click='toProfile(article?.author)'> by {{article?.author_name}}</h2>
+    <h2 @click='toProfile(article.author)'> by {{article?.author_name}}</h2>
     <div class="mx-3 my-2">
       <div v-html="article?.content"></div>
     </div>
@@ -67,7 +67,7 @@ export default {
   },
   computed : {
     computedLike() {
-      return this.article?.liking_users.includes(this.$store.state.id)
+      return this.article?.liking_users.includes(this.$store.state.id)? true:false
     },
     authorIdentification () {
       return this.article?.author === this.$store.state.id
@@ -80,7 +80,7 @@ export default {
     getArticle() {
       axios({
         method: 'get',
-        url: API_URL + "/api/articles/" + this.$route.params.articleID,
+        url: API_URL + `/api/articles/${this.$route.params.articleID}/`,
         headers: {
           Authorization : `Token ${this.$store.state.token}`
         }

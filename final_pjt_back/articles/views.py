@@ -36,7 +36,7 @@ def article_list(request):
 def article_detail(request, article_pk):
     # article = Article.objects.get(pk=article_pk)
     article = get_object_or_404(Article, pk=article_pk)
-
+    print('abc')
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
         # print(serializer.data)
