@@ -131,7 +131,7 @@ export default new Vuex.Store({
           })
             .then((res2) => {
               console.log(res2.data)
-              context.commit('SAVE_ID', res2.data.pk)
+              context.commit('SAVE_ID', res2.data)
             })
             .catch(err => console.log(err))
 
