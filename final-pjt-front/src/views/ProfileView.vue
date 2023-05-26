@@ -2,14 +2,14 @@
   <div class="profile_container p-5">
 
     <div class="profile p-5">
-      <img :src="'http://localhost:8000' + user.profile_img" v-if="user.profile_img"/>
+      <img :src="'http://localhost:8000' + user.profile_img" v-if="user?.profile_img"/>
       <img src="@/assets/img/base_profile.png" v-else/>
-      <h1 class="pt-3 pb-0"> {{ user.username }} </h1>
-      <p>{{user.profile_message}} </p>
+      <h1 class="pt-3 pb-0"> {{ user?.username }} </h1>
+      <p>{{user?.profile_message}} </p>
       
       <div class="d-flex flex-row py-1 px-5 mb-3 justify-content-around">
         <div class="followings d-flex flex-column" data-bs-toggle="modal" data-bs-target="#following">
-          <span class="count">{{user.following_count}}</span>
+          <span class="count">{{user?.following_count}}</span>
           <span class="label">Following</span>
         </div>
 
@@ -22,7 +22,7 @@
               </div>
               <div class="modal-body">
                 <FollowItem
-                :follows="user.following"
+                :follows="user?.following"
                 />
               </div>
             </div>
@@ -31,7 +31,7 @@
         
 
         <div class="followers d-flex flex-column" data-bs-toggle="modal" data-bs-target="#followers">
-          <span class="count">{{user.followers_count}}</span>
+          <span class="count">{{user?.followers_count}}</span>
           <span class="label">Followers</span>
         </div>
 
@@ -45,7 +45,7 @@
               </div>
               <div class="modal-body">
                 <FollowItem
-                :follows="user.followers"
+                :follows="user?.followers"
                 />
               </div>
             </div>
@@ -63,7 +63,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">{{user.username}}님의 프로필</h1>
+              <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">{{user?.username}}님의 프로필</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -88,10 +88,10 @@
 
     <div class="board">
       <div class="watchlist d-flex flex-column align-items-start container-fluid p-0">
-        <h2>{{ user.username }} 님의 재생목록</h2>
+        <h2>{{ user?.username }} 님의 재생목록</h2>
         <div class="d-flex">
           <WatchLists
-          :watchlists="user.watchlists"
+          :watchlists="user?.watchlists"
           :owner="owner"
           @added-watchlist="getProfile"/>
         </div>
@@ -124,7 +124,7 @@
           </thead>
           <tbody>
             <TableItem
-              v-for="article in user.articles"
+              v-for="article in user?.articles"
               :key="article.id"
               :item="article"
             />
@@ -143,7 +143,7 @@
           </thead>
           <tbody>
             <TableItem
-              v-for="article in user.liked_articles"
+              v-for="article in user?.liked_articles"
               :key="article.id"
               :item="article"
             />
