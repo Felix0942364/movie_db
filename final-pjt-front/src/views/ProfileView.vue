@@ -2,7 +2,7 @@
   <div class="profile_container p-5">
 
     <div class="profile p-5">
-      <img :src="'http://localhost:8000' + user.profile_img" v-if="user?.profile_img"/>
+      <img :src="'http://localhost:8000' + user?.profile_img" v-if="user?.profile_img"/>
       <img src="@/assets/img/base_profile.png" v-else/>
       <h1 class="pt-3 pb-0"> {{ user?.username }} </h1>
       <p>{{user?.profile_message}} </p>
@@ -161,7 +161,7 @@
           </thead>
           <tbody>
             <CommentTableItem
-              v-for="comment in user.comments"
+              v-for="comment in user?.comments"
               :key="comment.id"
               :item="comment"
             />

@@ -1,7 +1,7 @@
 <template>
   <div class="article mt-3 p-3">
     <h1 class="mt-3">{{ article?.title }}</h1>
-    <h2 @click='toProfile(article.author)'> by {{article.author_name}}</h2>
+    <h2 @click='toProfile(article?.author)'> by {{article?.author_name}}</h2>
     <div class="mx-3 my-2">
       <div v-html="article?.content"></div>
     </div>
